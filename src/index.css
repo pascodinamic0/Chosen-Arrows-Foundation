@@ -8,52 +8,52 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 45 25% 98%;
-    --foreground: 260 15% 15%;
+    --background: 330 100% 98%;
+    --foreground: 160 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 260 15% 15%;
+    --card-foreground: 160 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 260 15% 15%;
+    --popover-foreground: 160 15% 15%;
 
-    --primary: 43 96% 56%;
-    --primary-foreground: 260 15% 15%;
+    --primary: 340 82% 85%;
+    --primary-foreground: 160 15% 15%;
 
-    --secondary: 262 83% 58%;
+    --secondary: 150 65% 45%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 45 25% 96%;
-    --muted-foreground: 260 10% 45%;
+    --muted: 330 40% 96%;
+    --muted-foreground: 160 10% 45%;
 
-    --accent: 217 91% 60%;
+    --accent: 145 70% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 45 15% 90%;
-    --input: 45 15% 90%;
-    --ring: 43 96% 56%;
+    --border: 330 25% 90%;
+    --input: 330 25% 90%;
+    --ring: 340 82% 85%;
 
     --radius: 0.75rem;
 
     /* Custom tokens for Chosen Arrows Foundation */
-    --hope-gold: 43 96% 56%;
-    --destiny-purple: 262 83% 58%;
-    --faith-blue: 217 91% 60%;
-    --light-cream: 45 25% 98%;
-    --warm-gray: 260 10% 45%;
+    --soft-pink: 340 82% 85%;
+    --deep-green: 150 65% 45%;
+    --light-green: 145 70% 50%;
+    --pale-pink: 330 100% 98%;
+    --warm-gray: 160 10% 45%;
 
     /* Gradients */
-    --gradient-sunrise: linear-gradient(135deg, hsl(43 96% 56%), hsl(262 83% 58%));
-    --gradient-heavenly: linear-gradient(135deg, hsl(217 91% 60%), hsl(262 83% 58%));
-    --gradient-soft: linear-gradient(180deg, hsl(45 25% 98%), hsl(45 15% 96%));
+    --gradient-sunrise: linear-gradient(135deg, hsl(340 82% 85%), hsl(150 65% 45%));
+    --gradient-heavenly: linear-gradient(135deg, hsl(145 70% 50%), hsl(340 82% 85%));
+    --gradient-soft: linear-gradient(180deg, hsl(330 100% 98%), hsl(330 40% 96%));
 
     /* Shadows */
-    --shadow-warm: 0 10px 40px -10px hsl(43 96% 56% / 0.25);
-    --shadow-divine: 0 20px 60px -15px hsl(262 83% 58% / 0.3);
-    --shadow-elegant: 0 4px 20px hsl(260 10% 15% / 0.08);
+    --shadow-warm: 0 10px 40px -10px hsl(340 82% 85% / 0.25);
+    --shadow-divine: 0 20px 60px -15px hsl(150 65% 45% / 0.3);
+    --shadow-elegant: 0 4px 20px hsl(160 10% 15% / 0.08);
 
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -61,33 +61,33 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 260 25% 8%;
-    --foreground: 45 25% 95%;
+    --background: 160 25% 8%;
+    --foreground: 330 25% 95%;
 
-    --card: 260 20% 12%;
-    --card-foreground: 45 25% 95%;
+    --card: 160 20% 12%;
+    --card-foreground: 330 25% 95%;
 
-    --popover: 260 20% 12%;
-    --popover-foreground: 45 25% 95%;
+    --popover: 160 20% 12%;
+    --popover-foreground: 330 25% 95%;
 
-    --primary: 43 96% 56%;
-    --primary-foreground: 260 15% 15%;
+    --primary: 340 82% 85%;
+    --primary-foreground: 160 15% 15%;
 
-    --secondary: 262 83% 58%;
+    --secondary: 150 65% 45%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 260 20% 16%;
-    --muted-foreground: 45 15% 65%;
+    --muted: 160 20% 16%;
+    --muted-foreground: 330 15% 65%;
 
-    --accent: 217 91% 60%;
+    --accent: 145 70% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 260 15% 20%;
-    --input: 260 15% 20%;
-    --ring: 43 96% 56%;
+    --border: 160 15% 20%;
+    --input: 160 15% 20%;
+    --ring: 340 82% 85%;
   }
 }
 

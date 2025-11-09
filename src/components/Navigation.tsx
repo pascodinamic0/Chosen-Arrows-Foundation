@@ -2,9 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Heart, Menu } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border">
@@ -22,20 +25,21 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/about" className="text-foreground hover:text-primary transition-colors">
-              About
+              {t('nav.about')}
             </Link>
             <Link to="/campaigns" className="text-foreground hover:text-primary transition-colors">
-              Campaigns
+              {t('nav.campaigns')}
             </Link>
             <Link to="/mentorship" className="text-foreground hover:text-primary transition-colors">
-              Mentorship
+              {t('nav.mentorship')}
             </Link>
             <Link to="/contact" className="text-foreground hover:text-primary transition-colors">
-              Contact
+              {t('nav.contact')}
             </Link>
+            <LanguageSwitcher />
             <Link to="/donate">
               <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity">
-                Donate Now
+                {t('nav.donate')}
               </Button>
             </Link>
           </div>
@@ -57,32 +61,35 @@ const Navigation = () => {
               className="block py-2 text-foreground hover:text-primary transition-colors"
               onClick={() => setIsOpen(false)}
             >
-              About
+              {t('nav.about')}
             </Link>
             <Link
               to="/campaigns"
               className="block py-2 text-foreground hover:text-primary transition-colors"
               onClick={() => setIsOpen(false)}
             >
-              Campaigns
+              {t('nav.campaigns')}
             </Link>
             <Link
               to="/mentorship"
               className="block py-2 text-foreground hover:text-primary transition-colors"
               onClick={() => setIsOpen(false)}
             >
-              Mentorship
+              {t('nav.mentorship')}
             </Link>
             <Link
               to="/contact"
               className="block py-2 text-foreground hover:text-primary transition-colors"
               onClick={() => setIsOpen(false)}
             >
-              Contact
+              {t('nav.contact')}
             </Link>
+            <div className="py-2">
+              <LanguageSwitcher />
+            </div>
             <Link to="/donate" onClick={() => setIsOpen(false)}>
               <Button size="lg" className="w-full bg-gradient-to-r from-primary to-secondary">
-                Donate Now
+                {t('nav.donate')}
               </Button>
             </Link>
           </div>

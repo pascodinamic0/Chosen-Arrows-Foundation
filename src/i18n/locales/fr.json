@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "about": "À propos",
+    "campaigns": "Campagnes",
+    "mentorship": "Mentorat",
+    "contact": "Contact",
+    "donate": "Faire un don"
+  },
+  "hero": {
+    "title": "Autonomiser les leaders de demain",
+    "subtitle": "Par la foi, l'éducation et la compassion, nous transformons des vies un enfant à la fois",
+    "cta": "Commencer à faire la différence"
+  },
+  "values": {
+    "title": "Nos valeurs fondamentales",
+    "subtitle": "R.I.T.A.H",
+    "righteousness": "Droiture",
+    "integrity": "Intégrité",
+    "truth": "Vérité",
+    "accountability": "Responsabilité",
+    "hope": "Espoir"
+  },
+  "campaigns": {
+    "title": "Campagnes actives",
+    "subtitle": "Chaque enfant a une histoire. Votre soutien écrit le prochain chapitre.",
+    "viewAll": "Voir toutes les campagnes"
+  },
+  "impact": {
+    "title": "Notre impact",
+    "children": "Enfants aidés",
+    "communities": "Communautés atteintes",
+    "mentors": "Mentors actifs",
+    "success": "Taux de réussite"
+  },
+  "community": {
+    "title": "Histoires de la communauté",
+    "subtitle": "Des histoires réelles de personnes réelles qui font la différence"
+  },
+  "cta": {
+    "title": "Prêt à faire la différence?",
+    "subtitle": "Rejoignez-nous pour transformer des vies par la foi, l'éducation et la compassion",
+    "donate": "Faire un don",
+    "volunteer": "Devenir mentor"
+  },
+  "footer": {
+    "tagline": "Autonomiser l'avenir par la foi et l'éducation",
+    "quickLinks": "Liens rapides",
+    "getInvolved": "S'impliquer",
+    "contact": "Nous contacter",
+    "volunteer": "Devenir bénévole",
+    "partner": "Partenariat",
+    "email": "Email",
+    "phone": "Téléphone",
+    "rights": "Tous droits réservés",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "transparency": "Rapport de transparence"
+  }
+}

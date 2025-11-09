@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "about": "关于我们",
+    "campaigns": "活动",
+    "mentorship": "导师计划",
+    "contact": "联系我们",
+    "donate": "立即捐赠"
+  },
+  "hero": {
+    "title": "赋能明日领袖",
+    "subtitle": "通过信仰、教育和同情心，我们正在改变一个又一个孩子的生活",
+    "cta": "开始做出改变"
+  },
+  "values": {
+    "title": "我们的核心价值观",
+    "subtitle": "R.I.T.A.H",
+    "righteousness": "正义",
+    "integrity": "诚信",
+    "truth": "真理",
+    "accountability": "责任",
+    "hope": "希望"
+  },
+  "campaigns": {
+    "title": "活跃的活动",
+    "subtitle": "每个孩子都有一个故事。您的支持书写下一章节。",
+    "viewAll": "查看所有活动"
+  },
+  "impact": {
+    "title": "我们的影响",
+    "children": "帮助的儿童",
+    "communities": "覆盖的社区",
+    "mentors": "活跃导师",
+    "success": "成功率"
+  },
+  "community": {
+    "title": "社区故事",
+    "subtitle": "真实的人讲述真实的故事，创造真实的影响"
+  },
+  "cta": {
+    "title": "准备好做出改变了吗？",
+    "subtitle": "加入我们，通过信仰、教育和同情心改变生活",
+    "donate": "进行捐赠",
+    "volunteer": "成为导师"
+  },
+  "footer": {
+    "tagline": "通过信仰和教育赋能未来",
+    "quickLinks": "快速链接",
+    "getInvolved": "参与我们",
+    "contact": "联系我们",
+    "volunteer": "志愿者",
+    "partner": "与我们合作",
+    "email": "邮箱",
+    "phone": "电话",
+    "rights": "版权所有",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "transparency": "透明度报告"
+  }
+}

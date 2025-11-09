@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "about": "About",
+    "campaigns": "Campaigns",
+    "mentorship": "Mentorship",
+    "contact": "Contact",
+    "donate": "Donate Now"
+  },
+  "hero": {
+    "title": "Empowering Tomorrow's Leaders",
+    "subtitle": "Through faith, education, and compassion, we're transforming lives one child at a time",
+    "cta": "Start Making a Difference"
+  },
+  "values": {
+    "title": "Our Core Values",
+    "subtitle": "R.I.T.A.H",
+    "righteousness": "Righteousness",
+    "integrity": "Integrity",
+    "truth": "Truth",
+    "accountability": "Accountability",
+    "hope": "Hope"
+  },
+  "campaigns": {
+    "title": "Active Campaigns",
+    "subtitle": "Every child has a story. Your support writes the next chapter.",
+    "viewAll": "View All Campaigns"
+  },
+  "impact": {
+    "title": "Our Impact",
+    "children": "Children Helped",
+    "communities": "Communities Reached",
+    "mentors": "Active Mentors",
+    "success": "Success Rate"
+  },
+  "community": {
+    "title": "Community Stories",
+    "subtitle": "Real stories from real people making a difference"
+  },
+  "cta": {
+    "title": "Ready to Make a Difference?",
+    "subtitle": "Join us in transforming lives through faith, education, and compassion",
+    "donate": "Make a Donation",
+    "volunteer": "Become a Mentor"
+  },
+  "footer": {
+    "tagline": "Empowering futures through faith and education",
+    "quickLinks": "Quick Links",
+    "getInvolved": "Get Involved",
+    "contact": "Contact Us",
+    "volunteer": "Volunteer",
+    "partner": "Partner With Us",
+    "email": "Email",
+    "phone": "Phone",
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "transparency": "Transparency Report"
+  }
+}
