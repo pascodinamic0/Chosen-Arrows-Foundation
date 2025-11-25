@@ -106,8 +106,8 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start space-x-2 text-muted-foreground">
                 <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <a href="mailto:info@chosenarrows.org" className="hover:text-primary transition-colors">
-                  info@chosenarrows.org
+                <a href="mailto:ChosenArrowsFoundation@gmail.com" className="hover:text-primary transition-colors">
+                  ChosenArrowsFoundation@gmail.com
                 </a>
               </li>
               <li className="text-muted-foreground leading-relaxed">

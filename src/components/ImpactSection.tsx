@@ -4,28 +4,28 @@ import { GraduationCap, Users, BookOpen, Heart, TrendingUp, Globe } from "lucide
 const stats = [
   {
     icon: Users,
-    value: "500+",
+    value: "45",
     label: "Children Supported",
     description: "Lives touched and transformed",
     color: "from-primary to-secondary",
   },
   {
     icon: GraduationCap,
-    value: "250+",
+    value: "30",
     label: "Scholarships Awarded",
     description: "Educational dreams fulfilled",
     color: "from-secondary to-accent",
   },
   {
     icon: BookOpen,
-    value: "120+",
+    value: "8",
     label: "Active Mentorships",
     description: "Guided toward purpose",
     color: "from-accent to-primary",
   },
   {
     icon: Heart,
-    value: "2,500+",
+    value: "100+",
     label: "Donors Worldwide",
     description: "Partners in hope",
     color: "from-primary to-accent",
@@ -39,9 +39,9 @@ const stats = [
   },
   {
     icon: Globe,
-    value: "15",
+    value: "2",
     label: "Countries Served",
-    description: "Global reach",
+    description: "Kenya & Uganda",
     color: "from-accent to-secondary",
   },
 ];
