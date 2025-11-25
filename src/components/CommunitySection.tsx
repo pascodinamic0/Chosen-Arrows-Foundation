@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Quote } from "lucide-react";
 import communityImage from "@/assets/community.jpg";
+import { useTranslation } from "react-i18next";
 
 const testimonials = [
   {
@@ -24,19 +25,21 @@ const testimonials = [
 ];
 
 const CommunitySection = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="community" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16 animate-fade-in">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            A Community of{" "}
+            {t('community.title').split('Hope Builders')[0]}
             <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              Hope Builders
+              {t('community.title').includes('Hope') ? t('community.title').match(/Hope.*$/)?.[0] : t('community.title').split(' ').slice(-2).join(' ')}
             </span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground">
-            Hear from those who believe, give, and witness transformation
+            {t('community.subtitle')}
           </p>
         </div>
 
@@ -51,7 +54,7 @@ const CommunitySection = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
             <div className="absolute bottom-6 left-6 right-6 text-center">
               <p className="text-xl md:text-2xl font-semibold text-card-foreground">
-                Together, we are shaping the next generation of leaders
+                {t('community.imageCaption')}
               </p>
             </div>
           </div>
@@ -91,19 +94,19 @@ const CommunitySection = () => {
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 98%
               </div>
-              <div className="text-sm text-muted-foreground">Donor Retention</div>
+              <div className="text-sm text-muted-foreground">{t('community.donorRetention')}</div>
             </div>
             <div className="space-y-2">
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
                 4.9★
               </div>
-              <div className="text-sm text-muted-foreground">Average Rating</div>
+              <div className="text-sm text-muted-foreground">{t('community.avgRating')}</div>
             </div>
             <div className="space-y-2">
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
                 100%
               </div>
-              <div className="text-sm text-muted-foreground">Transparency</div>
+              <div className="text-sm text-muted-foreground">{t('community.transparency')}</div>
             </div>
           </div>
         </div>

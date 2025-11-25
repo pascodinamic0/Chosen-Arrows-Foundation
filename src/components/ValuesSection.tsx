@@ -1,53 +1,56 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Shield, HandHeart, Sparkles, CheckCircle } from "lucide-react";
-
-const values = [
-  {
-    icon: HandHeart,
-    title: "Responsibility",
-    description: "We care for every child entrusted to us with compassion and accountability.",
-    color: "from-primary to-secondary",
-  },
-  {
-    icon: Shield,
-    title: "Integrity",
-    description: "We uphold honesty and transparency in every action and partnership.",
-    color: "from-secondary to-accent",
-  },
-  {
-    icon: Heart,
-    title: "Trust",
-    description: "We build dependable relationships rooted in love and consistency.",
-    color: "from-accent to-primary",
-  },
-  {
-    icon: Sparkles,
-    title: "Adeptness",
-    description: "We serve with excellence, always learning and growing in purpose.",
-    color: "from-primary to-accent",
-  },
-  {
-    icon: CheckCircle,
-    title: "Honesty",
-    description: "We speak truth in love — reflecting the nature and light of God.",
-    color: "from-secondary to-primary",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const ValuesSection = () => {
+  const { t } = useTranslation();
+
+  const values = [
+    {
+      icon: HandHeart,
+      titleKey: "values.responsibility",
+      descKey: "values.responsibilityDesc",
+      color: "from-primary to-secondary",
+    },
+    {
+      icon: Shield,
+      titleKey: "values.integrity",
+      descKey: "values.integrityDesc",
+      color: "from-secondary to-accent",
+    },
+    {
+      icon: Heart,
+      titleKey: "values.trust",
+      descKey: "values.trustDesc",
+      color: "from-accent to-primary",
+    },
+    {
+      icon: Sparkles,
+      titleKey: "values.adeptness",
+      descKey: "values.adeptnessDesc",
+      color: "from-primary to-accent",
+    },
+    {
+      icon: CheckCircle,
+      titleKey: "values.honesty",
+      descKey: "values.honestyDesc",
+      color: "from-secondary to-primary",
+    },
+  ];
+
   return (
     <section id="mission" className="py-20 md:py-32 bg-gradient-to-b from-background via-muted/20 to-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16 animate-fade-in">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            Our Core Values
+            {t('values.title')}
             <span className="block mt-2 text-2xl sm:text-3xl bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              R.I.T.A.H
+              {t('values.subtitle')}
             </span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground">
-            Guiding principles that shape everything we do and every life we touch
+            {t('values.description')}
           </p>
         </div>
 
@@ -57,7 +60,7 @@ const ValuesSection = () => {
             const Icon = value.icon;
             return (
               <Card
-                key={value.title}
+                key={value.titleKey}
                 className="group hover:shadow-[var(--shadow-divine)] transition-all duration-300 hover:-translate-y-2 animate-fade-in-up border-border/50"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
@@ -67,8 +70,8 @@ const ValuesSection = () => {
                   >
                     <Icon className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold">{value.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                  <h3 className="text-xl font-bold">{t(value.titleKey)}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{t(value.descKey)}</p>
                 </CardContent>
               </Card>
             );
@@ -79,10 +82,9 @@ const ValuesSection = () => {
         <div className="max-w-4xl mx-auto mt-16 p-8 md:p-12 rounded-2xl bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border border-primary/10 animate-fade-in">
           <blockquote className="text-center space-y-4">
             <p className="text-xl md:text-2xl font-medium leading-relaxed">
-              "Just like arrows in the hands of a skilled archer, we aim to guide the children God 
-              entrusts to us toward the direction of their ordained destinies."
+              "{t('values.visionQuote')}"
             </p>
-            <footer className="text-muted-foreground font-semibold">— Our Vision</footer>
+            <footer className="text-muted-foreground font-semibold">— {t('values.vision')}</footer>
           </blockquote>
         </div>
       </div>

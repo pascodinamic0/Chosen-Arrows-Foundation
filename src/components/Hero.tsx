@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Heart, Users } from "lucide-react";
 import heroBackground from "@/assets/hero-background.jpg";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20">
       {/* Background Image with Overlay */}
@@ -19,21 +22,20 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center space-x-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 text-sm font-medium text-primary animate-scale-in">
             <Heart className="w-4 h-4" fill="currentColor" />
-            <span>Empowering Children, Shaping Destinies</span>
+            <span>{t('hero.badge')}</span>
           </div>
 
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            Every Child is an{" "}
+            {t('hero.title').split('Arrow in the Hand of God')[0]}
             <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              Arrow in the Hand of God
+              {t('hero.title').includes('Arrow') ? t('hero.title').match(/Arrow.*$/)?.[0] : t('hero.title').split(' ').slice(-6).join(' ')}
             </span>
           </h1>
 
           {/* Subheading */}
           <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-            We guide children toward their ordained destinies through mentorship, education, and 
-            transparent support — planting seeds of hope that will light up the world.
+            {t('hero.subtitle')}
           </p>
 
           {/* CTA Buttons */}
@@ -42,7 +44,7 @@ const Hero = () => {
               size="lg"
               className="w-full sm:w-auto text-lg px-8 py-6 bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-all hover:scale-105 shadow-[var(--shadow-warm)]"
             >
-              Start Giving Hope
+              {t('hero.cta')}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <Button
@@ -51,7 +53,7 @@ const Hero = () => {
               className="w-full sm:w-auto text-lg px-8 py-6 border-2 hover:bg-accent hover:text-accent-foreground transition-all"
             >
               <Users className="mr-2 w-5 h-5" />
-              Become a Mentor
+              {t('hero.ctaMentor')}
             </Button>
           </div>
 
@@ -61,19 +63,19 @@ const Hero = () => {
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 45
               </div>
-              <div className="text-sm md:text-base text-muted-foreground">Children Supported</div>
+              <div className="text-sm md:text-base text-muted-foreground">{t('hero.childrenSupported')}</div>
             </div>
             <div className="text-center space-y-1">
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
                 8
               </div>
-              <div className="text-sm md:text-base text-muted-foreground">Active Mentors</div>
+              <div className="text-sm md:text-base text-muted-foreground">{t('hero.activeMentors')}</div>
             </div>
             <div className="text-center space-y-1">
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
                 $15K
               </div>
-              <div className="text-sm md:text-base text-muted-foreground">Funds Raised</div>
+              <div className="text-sm md:text-base text-muted-foreground">{t('hero.fundsRaised')}</div>
             </div>
           </div>
         </div>
