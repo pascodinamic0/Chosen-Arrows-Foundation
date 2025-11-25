@@ -15,9 +15,9 @@ const campaigns = [
     child: "Sarah, 12",
     story: "Sarah dreams of becoming a doctor to help her community. With your support, she can attend secondary school and pursue her calling.",
     image: childImage1,
-    raised: 3500,
-    goal: 5000,
-    supporters: 47,
+    raised: 850,
+    goal: 1500,
+    supporters: 15,
     daysLeft: 23,
     category: "Education"
   },
@@ -27,9 +27,9 @@ const campaigns = [
     child: "David, 8",
     story: "David needs ongoing treatment for a treatable condition. Your donation can provide the medical care that will change his life forever.",
     image: childImage2,
-    raised: 2800,
-    goal: 4000,
-    supporters: 35,
+    raised: 580,
+    goal: 1200,
+    supporters: 12,
     daysLeft: 15,
     category: "Healthcare"
   },
@@ -39,9 +39,9 @@ const campaigns = [
     child: "Grace, 16",
     story: "Grace wants to learn vocational skills to support her younger siblings. Help us provide the training she needs for a brighter future.",
     image: childImage1,
-    raised: 1200,
-    goal: 3000,
-    supporters: 18,
+    raised: 420,
+    goal: 900,
+    supporters: 8,
     daysLeft: 45,
     category: "Skills"
   }

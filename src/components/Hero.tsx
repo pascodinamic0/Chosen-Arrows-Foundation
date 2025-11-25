@@ -59,19 +59,19 @@ const Hero = () => {
           <div className="grid grid-cols-3 gap-4 md:gap-8 pt-12 max-w-2xl mx-auto">
             <div className="text-center space-y-1">
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                500+
+                45
               </div>
               <div className="text-sm md:text-base text-muted-foreground">Children Supported</div>
             </div>
             <div className="text-center space-y-1">
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
-                120+
+                8
               </div>
               <div className="text-sm md:text-base text-muted-foreground">Active Mentors</div>
             </div>
             <div className="text-center space-y-1">
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
-                $2M+
+                $15K
               </div>
               <div className="text-sm md:text-base text-muted-foreground">Funds Raised</div>
             </div>
