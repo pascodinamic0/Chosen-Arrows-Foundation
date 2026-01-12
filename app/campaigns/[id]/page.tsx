@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CampaignDetailClient from "./CampaignDetailClient";
 import childImage1 from "@/assets/child-1.jpg";
+import type { StaticImageData } from "next/image";
 
 interface CampaignData {
   title: string;
   child: string;
   fullStory: string;
-  image: string | { src: string };
+  image: string | StaticImageData;
   raised: number;
   goal: number;
   supporters: number;
@@ -85,7 +86,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 
   const progress = Math.round((campaign.raised / campaign.goal) * 100);
-  const imageUrl = typeof campaign.image === 'string' ? campaign.image : campaign.image.src;
+  const imageUrl = typeof campaign.image === 'string' 
+    ? campaign.image 
+    : campaign.image.src;
 
   return {
     title: `${campaign.title} | Chosen Arrows Foundation`,
