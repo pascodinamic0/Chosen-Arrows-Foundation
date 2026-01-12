@@ -1,10 +1,13 @@
+"use client";
+
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Heart, Calendar, Users } from "lucide-react";
-import { Link } from "react-router-dom";
+import Image from "next/image";
+import Link from "next/link";
 import childImage1 from "@/assets/child-1.jpg";
 import childImage2 from "@/assets/child-2.jpg";
 
@@ -47,7 +50,7 @@ const campaigns = [
   }
 ];
 
-const Campaigns = () => {
+export default function CampaignsClient() {
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -77,10 +80,14 @@ const Campaigns = () => {
                 return (
                   <Card key={campaign.id} className="group hover:shadow-[var(--shadow-divine)] transition-all duration-300 hover:-translate-y-2 overflow-hidden">
                     <div className="relative h-64 overflow-hidden">
-                      <img 
-                        src={campaign.image} 
+                      <Image
+                        src={campaign.image}
                         alt={campaign.child}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        fill
+                        priority={campaign.id <= 2}
+                        quality={85}
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                       <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary/90 text-primary-foreground text-sm font-semibold backdrop-blur-sm">
                         {campaign.category}
@@ -115,7 +122,7 @@ const Campaigns = () => {
                         </div>
                       </div>
 
-                      <Link to={`/campaigns/${campaign.id}`}>
+                      <Link href={`/campaigns/${campaign.id}`}>
                         <Button className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90">
                           <Heart className="w-4 h-4 mr-2" fill="currentColor" />
                           Support Campaign
@@ -133,6 +140,4 @@ const Campaigns = () => {
       <Footer />
     </div>
   );
-};
-
-export default Campaigns;
+}

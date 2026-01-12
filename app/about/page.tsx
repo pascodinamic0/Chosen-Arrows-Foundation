@@ -1,9 +1,21 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Heart, Target, Users, Sparkles } from "lucide-react";
+import { Target, Sparkles } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
-const About = () => {
+export const metadata: Metadata = {
+  title: "About Us | Chosen Arrows Foundation",
+  description: "Learn about Chosen Arrows Foundation's mission to provide holistic care, education, and mentorship to vulnerable children, empowering them to discover and fulfill their God-given purpose.",
+  keywords: ["about", "mission", "vision", "story", "children", "education", "mentorship"],
+  openGraph: {
+    title: "About Us | Chosen Arrows Foundation",
+    description: "Learn about our mission to guide children toward their divine destiny",
+    type: "website",
+  },
+};
+
+export default function AboutPage() {
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -113,6 +125,4 @@ const About = () => {
       <Footer />
     </div>
   );
-};
-
-export default About;
+}

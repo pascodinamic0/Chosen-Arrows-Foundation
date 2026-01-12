@@ -1,37 +1,30 @@
+"use client";
+
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import Image from "next/image";
 import { Heart, Calendar, Users, Target, Share2 } from "lucide-react";
-import { useParams } from "react-router-dom";
 import childImage1 from "@/assets/child-1.jpg";
 
-const CampaignDetail = () => {
-  const { id } = useParams();
-
-  // Mock data - in real app, fetch based on id
-  const campaign = {
-    title: "Education for Hope",
-    child: "Sarah, 12",
-    fullStory: `Sarah is a bright and ambitious 12-year-old who dreams of becoming a doctor. Growing up in a small village, she has witnessed the lack of medical care in her community and feels called to make a difference.
-
-Despite facing numerous challenges, Sarah has consistently been at the top of her class. Her teachers describe her as diligent, compassionate, and exceptionally talented in sciences. However, her family's financial situation makes it impossible for them to afford secondary school fees.
-
-With your support, Sarah can continue her education and pursue her calling. The funds will cover school fees, uniforms, books, and necessary supplies for the next academic year. Every donation brings her one step closer to achieving her dream of serving her community as a healthcare professional.`,
-    image: childImage1,
-    raised: 3500,
-    goal: 5000,
-    supporters: 47,
-    daysLeft: 23,
-    category: "Education",
-    updates: [
-      { date: "2 days ago", text: "Sarah received her admission letter to St. Mary's Secondary School!" },
-      { date: "1 week ago", text: "50% of the goal reached - thank you for your generous support!" },
-      { date: "2 weeks ago", text: "Campaign launched - help Sarah achieve her dream" }
-    ]
+interface CampaignDetailClientProps {
+  campaign: {
+    title: string;
+    child: string;
+    fullStory: string;
+    image: string | { src: string } | any;
+    raised: number;
+    goal: number;
+    supporters: number;
+    daysLeft: number;
+    category: string;
+    updates: Array<{ date: string; text: string }>;
   };
+}
 
+export default function CampaignDetailClient({ campaign }: CampaignDetailClientProps) {
   const progress = (campaign.raised / campaign.goal) * 100;
 
   return (
@@ -46,10 +39,14 @@ With your support, Sarah can continue her education and pursue her calling. The 
               <div className="lg:col-span-2 space-y-8">
                 {/* Hero Image */}
                 <div className="relative h-96 rounded-2xl overflow-hidden">
-                  <img 
-                    src={campaign.image} 
+                  <Image
+                    src={campaign.image}
                     alt={campaign.child}
-                    className="w-full h-full object-cover"
+                    fill
+                    priority
+                    quality={90}
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 66vw"
                   />
                   <div className="absolute top-4 left-4 px-4 py-2 rounded-full bg-primary text-primary-foreground font-semibold backdrop-blur-sm">
                     {campaign.category}
@@ -148,6 +145,4 @@ With your support, Sarah can continue her education and pursue her calling. The 
       <Footer />
     </div>
   );
-};
-
-export default CampaignDetail;
+}

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,6 +7,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Heart, Users, Clock, CheckCircle, Target } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Become a Mentor | Chosen Arrows Foundation",
+  description: "Shape a child's destiny through guidance, wisdom, and unconditional support. Join our mentor program and make a lasting impact on a child's life.",
+  keywords: ["mentor", "mentorship", "volunteer", "guide", "support children", "mentor program"],
+  openGraph: {
+    title: "Become a Mentor | Chosen Arrows Foundation",
+    description: "Shape a child's destiny through guidance, wisdom, and unconditional support",
+    type: "website",
+  },
+};
 
 const benefits = [
   {
@@ -30,7 +42,7 @@ const benefits = [
   }
 ];
 
-const Mentorship = () => {
+export default function MentorshipPage() {
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -44,7 +56,7 @@ const Mentorship = () => {
                 Become a <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Mentor</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground">
-                Shape a child's destiny through guidance, wisdom, and unconditional support
+                Shape a child&apos;s destiny through guidance, wisdom, and unconditional support
               </p>
             </div>
           </div>
@@ -140,7 +152,7 @@ const Mentorship = () => {
                   </Button>
 
                   <p className="text-sm text-center text-muted-foreground">
-                    We'll review your application and get back to you within 5 business days
+                    We&apos;ll review your application and get back to you within 5 business days
                   </p>
                 </CardContent>
               </Card>
@@ -152,6 +164,4 @@ const Mentorship = () => {
       <Footer />
     </div>
   );
-};
-
-export default Mentorship;
+}

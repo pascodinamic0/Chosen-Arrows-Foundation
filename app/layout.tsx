@@ -1,0 +1,59 @@
+import type { Metadata } from "next";
+import { Providers } from "@/components/Providers";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://chosenarrows.com"),
+  title: {
+    default: "Chosen Arrows Foundation",
+    template: "%s | Chosen Arrows Foundation",
+  },
+  description: "Empowering children and communities through education and mentorship. Guide children toward their divine destiny with holistic care, education, and mentorship.",
+  keywords: ["children", "education", "mentorship", "charity", "foundation", "community", "nonprofit"],
+  authors: [{ name: "Chosen Arrows Foundation" }],
+  creator: "Chosen Arrows Foundation",
+  publisher: "Chosen Arrows Foundation",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://chosenarrows.com",
+    siteName: "Chosen Arrows Foundation",
+    title: "Chosen Arrows Foundation",
+    description: "Empowering children and communities through education and mentorship",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chosen Arrows Foundation",
+    description: "Empowering children and communities through education and mentorship",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}

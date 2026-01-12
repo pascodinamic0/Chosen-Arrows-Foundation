@@ -1,5 +1,8 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Quote } from "lucide-react";
+import Image from "next/image";
 import communityImage from "@/assets/community.jpg";
 import { useTranslation } from "react-i18next";
 
@@ -28,32 +31,35 @@ const CommunitySection = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="community" className="py-20 md:py-32 bg-background">
+    <section id="community" className="py-24 md:py-40 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-16 animate-fade-in">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+        <div className="max-w-3xl mx-auto text-center space-y-5 mb-20 animate-fade-in">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight">
             {t('community.title').split('Hope Builders')[0]}
-            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent drop-shadow-sm">
               {t('community.title').includes('Hope') ? t('community.title').match(/Hope.*$/)?.[0] : t('community.title').split(' ').slice(-2).join(' ')}
             </span>
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground">
+          <p className="text-lg md:text-xl text-foreground/75 leading-relaxed font-medium">
             {t('community.subtitle')}
           </p>
         </div>
 
         {/* Community Image */}
-        <div className="max-w-5xl mx-auto mb-16 animate-fade-in">
-          <div className="relative rounded-2xl overflow-hidden h-64 md:h-96 group">
-            <img
+        <div className="max-w-5xl mx-auto mb-20 animate-fade-in">
+          <div className="relative rounded-2xl overflow-hidden h-64 md:h-96 group shadow-2xl">
+            <Image
               src={communityImage}
               alt="Community of children and mentors"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              fill
+              quality={85}
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 text-center">
-              <p className="text-xl md:text-2xl font-semibold text-card-foreground">
+            <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
+            <div className="absolute bottom-8 left-8 right-8 text-center">
+              <p className="text-xl md:text-2xl font-bold text-card-foreground drop-shadow-lg">
                 {t('community.imageCaption')}
               </p>
             </div>
@@ -61,25 +67,25 @@ const CommunitySection = () => {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <Card
               key={testimonial.name}
-              className="group hover:shadow-[var(--shadow-divine)] transition-all duration-300 hover:-translate-y-2 animate-fade-in-up"
+              className="group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 animate-fade-in-up border-border/60"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <CardContent className="p-6 space-y-4">
-                <Quote className="w-8 h-8 text-primary opacity-50" />
-                <p className="text-muted-foreground leading-relaxed italic">
-                  "{testimonial.content}"
+              <CardContent className="p-7 space-y-5">
+                <Quote className="w-8 h-8 text-primary opacity-60" />
+                <p className="text-foreground/80 leading-relaxed italic font-medium">
+                  &ldquo;{testimonial.content}&rdquo;
                 </p>
-                <div className="flex items-center space-x-3 pt-4 border-t border-border">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">
+                <div className="flex items-center space-x-3 pt-5 border-t border-border/60">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold shadow-md">
                     {testimonial.avatar}
                   </div>
                   <div>
-                    <div className="font-semibold">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                    <div className="font-semibold text-foreground">{testimonial.name}</div>
+                    <div className="text-sm text-foreground/60 font-medium">{testimonial.role}</div>
                   </div>
                 </div>
               </CardContent>
@@ -88,25 +94,25 @@ const CommunitySection = () => {
         </div>
 
         {/* Community Stats */}
-        <div className="max-w-4xl mx-auto mt-16 p-8 md:p-12 rounded-2xl bg-gradient-to-br from-muted/50 to-background border border-border animate-fade-in">
-          <div className="grid grid-cols-3 gap-8 text-center">
-            <div className="space-y-2">
-              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+        <div className="max-w-4xl mx-auto mt-20 p-10 md:p-14 rounded-2xl bg-gradient-to-br from-muted/60 to-background border border-border/60 shadow-xl animate-fade-in">
+          <div className="grid grid-cols-3 gap-10 text-center">
+            <div className="space-y-3">
+              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent drop-shadow-sm">
                 98%
               </div>
-              <div className="text-sm text-muted-foreground">{t('community.donorRetention')}</div>
+              <div className="text-sm text-foreground/70 font-semibold">{t('community.donorRetention')}</div>
             </div>
-            <div className="space-y-2">
-              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+            <div className="space-y-3">
+              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent drop-shadow-sm">
                 4.9★
               </div>
-              <div className="text-sm text-muted-foreground">{t('community.avgRating')}</div>
+              <div className="text-sm text-foreground/70 font-semibold">{t('community.avgRating')}</div>
             </div>
-            <div className="space-y-2">
-              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+            <div className="space-y-3">
+              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent drop-shadow-sm">
                 100%
               </div>
-              <div className="text-sm text-muted-foreground">{t('community.transparency')}</div>
+              <div className="text-sm text-foreground/70 font-semibold">{t('community.transparency')}</div>
             </div>
           </div>
         </div>

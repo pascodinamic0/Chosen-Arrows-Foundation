@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,7 +8,18 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 
-const Contact = () => {
+export const metadata: Metadata = {
+  title: "Contact Us | Chosen Arrows Foundation",
+  description: "Get in touch with Chosen Arrows Foundation. Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+  keywords: ["contact", "get in touch", "email", "phone", "support"],
+  openGraph: {
+    title: "Contact Us | Chosen Arrows Foundation",
+    description: "Get in touch with us - we'd love to hear from you",
+    type: "website",
+  },
+};
+
+export default function ContactPage() {
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -21,7 +33,7 @@ const Contact = () => {
                 Get in <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Touch</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground">
-                Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+                Have questions? We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
               </p>
             </div>
           </div>
@@ -133,6 +145,4 @@ const Contact = () => {
       <Footer />
     </div>
   );
-};
-
-export default Contact;
+}
