@@ -56,6 +56,13 @@ const donationFormSchema = z.object({
 
 type DonationFormValues = z.infer<typeof donationFormSchema>;
 
+// Type guard for error result
+function isErrorResult(
+  result: DonationActionResult
+): result is Extract<DonationActionResult, { success: false }> {
+  return result.success === false;
+}
+
 export default function DonateClient() {
   const [isPending, setIsPending] = useState(false);
   const [result, setResult] = useState<DonationActionResult | null>(null);
@@ -85,7 +92,7 @@ export default function DonateClient() {
       form.reset();
       setSelectedAmount("50");
       setResult(null);
-    } else {
+    } else if (isErrorResult(result)) {
       toast.error(result.error, {
         duration: 5000,
       });
@@ -99,6 +106,7 @@ export default function DonateClient() {
           });
         });
       }
+      setResult(null);
     }
   }, [result, form]);
 
@@ -183,7 +191,7 @@ export default function DonateClient() {
                       )}
 
                       {/* Error Message */}
-                      {result?.error && !result.fieldErrors && (
+                      {result && isErrorResult(result) && result.error && !result.fieldErrors && (
                         <div className="rounded-lg bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 p-4 flex items-start gap-3">
                           <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0" />
                           <p className="text-sm font-medium text-red-800 dark:text-red-200">
