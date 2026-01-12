@@ -75,7 +75,9 @@ export default function DonateClient() {
 
   // Handle server action response
   useEffect(() => {
-    if (result?.success) {
+    if (!result) return;
+    
+    if (result.success) {
       toast.success(result.message, {
         description: result.donationId ? `Donation ID: ${result.donationId}` : undefined,
         duration: 5000,
@@ -83,7 +85,7 @@ export default function DonateClient() {
       form.reset();
       setSelectedAmount("50");
       setResult(null);
-    } else if (result?.error) {
+    } else {
       toast.error(result.error, {
         duration: 5000,
       });
