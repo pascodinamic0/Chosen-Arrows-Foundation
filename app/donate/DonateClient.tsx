@@ -113,7 +113,7 @@ export default function DonateClient() {
       
       const actionResult = await processDonation(formData);
       setResult(actionResult);
-    } catch (error) {
+    } catch (_error) {
       setResult({
         success: false,
         error: "An unexpected error occurred. Please try again later.",

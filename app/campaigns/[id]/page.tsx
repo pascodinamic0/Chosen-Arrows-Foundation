@@ -3,9 +3,22 @@ import { notFound } from "next/navigation";
 import CampaignDetailClient from "./CampaignDetailClient";
 import childImage1 from "@/assets/child-1.jpg";
 
+interface CampaignData {
+  title: string;
+  child: string;
+  fullStory: string;
+  image: string | { src: string };
+  raised: number;
+  goal: number;
+  supporters: number;
+  daysLeft: number;
+  category: string;
+  updates: Array<{ date: string; text: string }>;
+}
+
 // Mock data - in real app, fetch based on id
-const getCampaignData = (id: string) => {
-  const campaigns: Record<string, any> = {
+const getCampaignData = (id: string): CampaignData | null => {
+  const campaigns: Record<string, CampaignData> = {
     "1": {
       title: "Education for Hope",
       child: "Sarah, 12",

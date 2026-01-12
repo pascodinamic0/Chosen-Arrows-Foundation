@@ -7,14 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import Image from "next/image";
 import { Heart, Calendar, Users, Target, Share2 } from "lucide-react";
-import childImage1 from "@/assets/child-1.jpg";
+import type { StaticImageData } from "next/image";
 
 interface CampaignDetailClientProps {
   campaign: {
     title: string;
     child: string;
     fullStory: string;
-    image: string | { src: string } | any;
+    image: string | StaticImageData;
     raised: number;
     goal: number;
     supporters: number;
