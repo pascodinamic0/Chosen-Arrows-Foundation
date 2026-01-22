@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "verify-setup": "tsx scripts/verify-setup.ts",
-    "verify-supabase": "tsx scripts/verify-supabase-setup.ts"
+    "verify-supabase": "tsx scripts/verify-supabase-setup.ts",
+    "test-connection": "tsx scripts/test-vercel-connection.ts"
   },
   "homepage": "https://chosenarrows.com",
   "dependencies": {

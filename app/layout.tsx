@@ -52,11 +52,19 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Fetch footer data in parallel
-  const [contactInfo, socialLinks] = await Promise.all([
-    getSetting('contact_info').catch(() => null),
-    getSetting('social_links').catch(() => null),
-  ]);
+  // Fetch footer data in parallel with better error handling
+  let contactInfo = null;
+  let socialLinks = null;
+
+  try {
+    [contactInfo, socialLinks] = await Promise.all([
+      getSetting('contact_info').catch(() => null),
+      getSetting('social_links').catch(() => null),
+    ]);
+  } catch (error) {
+    console.error('Error fetching layout settings:', error);
+    // Continue with null values - layout should still render
+  }
 
   return (
     <html lang="en" suppressHydrationWarning>

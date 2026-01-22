@@ -16,19 +16,30 @@ export type SiteSetting = {
 export async function getSetting(
   settingKey: string
 ): Promise<Record<string, any> | null> {
-  const supabase = await createClient()
+  try {
+    const supabase = await createClient()
 
-  const { data, error } = await supabase
-    .from('site_settings')
-    .select('setting_value')
-    .eq('setting_key', settingKey)
-    .single()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('setting_value')
+      .eq('setting_key', settingKey)
+      .single()
 
-  if (error || !data) {
+    if (error) {
+      console.warn(`Failed to fetch setting "${settingKey}":`, error.message)
+      return null
+    }
+
+    if (!data) {
+      console.warn(`Setting "${settingKey}" not found`)
+      return null
+    }
+
+    return data.setting_value
+  } catch (error) {
+    console.error(`Error fetching setting "${settingKey}":`, error)
     return null
   }
-
-  return data.setting_value
 }
 
 /**
