@@ -10,7 +10,8 @@
     "verify-setup": "tsx scripts/verify-setup.ts",
     "verify-supabase": "tsx scripts/verify-supabase-setup.ts",
     "test-connection": "tsx scripts/test-vercel-connection.ts",
-    "seed-settings": "tsx scripts/seed-site-settings.ts"
+    "seed-settings": "tsx scripts/seed-site-settings.ts",
+    "setup-vercel-env": "tsx scripts/setup-vercel-env.ts"
   },
   "homepage": "https://chosenarrows.com",
   "dependencies": {
