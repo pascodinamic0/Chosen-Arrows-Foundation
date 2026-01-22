@@ -1,93 +1,136 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Shield, HandHeart, Sparkles, CheckCircle } from "lucide-react";
+import { Heart, Shield, HandHeart, Sparkles, CheckCircle, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-const ValuesSection = () => {
-  const { t } = useTranslation();
+type ValuesContent = {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  values?: Array<{
+    key?: string;
+    title: string;
+    description: string;
+  }>;
+  vision?: {
+    title?: string;
+    quote?: string;
+  };
+};
 
-  const values = [
+const iconMap: Record<string, typeof HandHeart> = {
+  responsibility: HandHeart,
+  integrity: Shield,
+  trust: Heart,
+  adeptness: Sparkles,
+  honesty: CheckCircle,
+  community: Users,
+};
+
+const ValuesSection = ({ content }: { content?: ValuesContent }) => {
+  const { t } = useTranslation();
+  
+  const fallbackValues = [
     {
       icon: HandHeart,
       titleKey: "values.responsibility",
       descKey: "values.responsibilityDesc",
-      color: "from-primary to-secondary",
     },
     {
       icon: Shield,
       titleKey: "values.integrity",
       descKey: "values.integrityDesc",
-      color: "from-secondary to-accent",
     },
     {
       icon: Heart,
       titleKey: "values.trust",
       descKey: "values.trustDesc",
-      color: "from-accent to-primary",
     },
     {
       icon: Sparkles,
       titleKey: "values.adeptness",
       descKey: "values.adeptnessDesc",
-      color: "from-primary to-accent",
     },
     {
       icon: CheckCircle,
       titleKey: "values.honesty",
       descKey: "values.honestyDesc",
-      color: "from-secondary to-primary",
+    },
+    {
+      icon: Users,
+      titleKey: "values.community",
+      descKey: "values.communityDesc",
     },
   ];
 
+  const values = content?.values?.length
+    ? content.values.map((value) => ({
+        icon: iconMap[value.key || ""] || Heart,
+        title: value.title,
+        description: value.description,
+      }))
+    : fallbackValues.map((value) => ({
+        ...value,
+        title: t(value.titleKey),
+        description: t(value.descKey),
+      }));
+
   return (
-    <section id="mission" className="py-24 md:py-40 bg-gradient-to-b from-background via-muted/20 to-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="mission" className="section-padding bg-gradient-to-b from-white to-taffy-50/30">
+      <div className="enterprise-container">
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center space-y-5 mb-20 animate-fade-in">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight">
-            {t('values.title')}
-            <span className="block mt-3 text-2xl sm:text-3xl bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent drop-shadow-sm">
-              {t('values.subtitle')}
-            </span>
+        <div className="max-w-2xl mx-auto text-center mb-12 md:mb-16">
+          <h2 className="mb-4 text-foreground text-balance">
+            {content?.title ?? t("values.title")}
           </h2>
-          <p className="text-lg md:text-xl text-foreground/75 leading-relaxed font-medium">
-            {t('values.description')}
+          <p className="text-muted-foreground text-lg">
+            {content?.description ?? t("values.description")}
           </p>
         </div>
 
-        {/* Values Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
           {values.map((value, index) => {
             const Icon = value.icon;
+            const isLarge = index === 0 || index === 3;
+            
             return (
-              <Card
-                key={value.titleKey}
-                className="group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 animate-fade-in-up border-border/60"
-                style={{ animationDelay: `${index * 100}ms` }}
+              <div
+                key={content?.values?.length ? `${value.title}-${index}` : value.titleKey}
+                className={`enterprise-card p-6 hover-lift group ${
+                  isLarge ? "md:col-span-2 lg:col-span-1" : ""
+                }`}
               >
-                <CardContent className="p-7 space-y-5">
-                  <div
-                    className={`w-16 h-16 rounded-xl bg-gradient-to-br ${value.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}
-                  >
-                    <Icon className="w-8 h-8 text-white" />
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-taffy-100 to-mint-100 flex items-center justify-center group-hover:from-taffy-200 group-hover:to-mint-200 transition-colors duration-200">
+                    <Icon className="w-5 h-5 text-taffy-500" />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">{t(value.titleKey)}</h3>
-                  <p className="text-foreground/75 leading-relaxed font-medium">{t(value.descKey)}</p>
-                </CardContent>
-              </Card>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base font-semibold text-foreground mb-1.5">
+                      {value.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
             );
           })}
         </div>
 
         {/* Mission Statement */}
-        <div className="max-w-4xl mx-auto mt-20 p-10 md:p-14 rounded-2xl bg-gradient-to-br from-primary/8 via-secondary/8 to-accent/8 border border-primary/20 shadow-xl animate-fade-in">
-          <blockquote className="text-center space-y-5">
-            <p className="text-xl md:text-2xl font-semibold leading-relaxed text-foreground/90">
-              &ldquo;{t('values.visionQuote')}&rdquo;
-            </p>
-            <footer className="text-foreground/70 font-bold text-lg">— {t('values.vision')}</footer>
-          </blockquote>
+        <div className="max-w-3xl mx-auto mt-12 md:mt-16">
+          <div className="enterprise-card p-8 md:p-10 text-center bg-gradient-to-br from-white via-mint-50/30 to-taffy-50/20 border-mint-200/50">
+            <blockquote>
+              <p className="text-lg md:text-xl text-foreground font-medium leading-relaxed mb-4">
+                &ldquo;{content?.vision?.quote ?? t("values.visionQuote")}&rdquo;
+              </p>
+              <footer className="text-sm text-taffy-500 font-medium">
+                — {content?.vision?.title ?? t("values.vision")}
+              </footer>
+            </blockquote>
+          </div>
         </div>
       </div>
     </section>

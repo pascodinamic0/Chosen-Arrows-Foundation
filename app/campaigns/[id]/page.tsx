@@ -1,127 +1,103 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CampaignDetailClient from "./CampaignDetailClient";
-import childImage1 from "@/assets/child-1.jpg";
-import type { StaticImageData } from "next/image";
+import { getCampaign } from "@/app/actions/campaigns/get-campaign";
+import { getCampaignUpdates } from "@/app/actions/campaigns/manage-campaign-updates";
+import { getServerLanguage } from "@/lib/i18n";
+import { getPageMetadata } from "@/app/actions/metadata/get-page-metadata";
+import { formatDistanceToNow } from "date-fns";
 
-interface CampaignData {
-  title: string;
-  child: string;
-  fullStory: string;
-  image: string | StaticImageData;
-  raised: number;
-  goal: number;
-  supporters: number;
-  daysLeft: number;
-  category: string;
-  updates: Array<{ date: string; text: string }>;
+function formatUpdateDate(dateString: string): string {
+  try {
+    const date = new Date(dateString);
+    return formatDistanceToNow(date, { addSuffix: true });
+  } catch {
+    return dateString;
+  }
 }
 
-// Mock data - in real app, fetch based on id
-const getCampaignData = (id: string): CampaignData | null => {
-  const campaigns: Record<string, CampaignData> = {
-    "1": {
-      title: "Education for Hope",
-      child: "Sarah, 12",
-      fullStory: `Sarah is a bright and ambitious 12-year-old who dreams of becoming a doctor. Growing up in a small village, she has witnessed the lack of medical care in her community and feels called to make a difference.
-
-Despite facing numerous challenges, Sarah has consistently been at the top of her class. Her teachers describe her as diligent, compassionate, and exceptionally talented in sciences. However, her family's financial situation makes it impossible for them to afford secondary school fees.
-
-With your support, Sarah can continue her education and pursue her calling. The funds will cover school fees, uniforms, books, and necessary supplies for the next academic year. Every donation brings her one step closer to achieving her dream of serving her community as a healthcare professional.`,
-      image: childImage1,
-      raised: 3500,
-      goal: 5000,
-      supporters: 47,
-      daysLeft: 23,
-      category: "Education",
-      updates: [
-        { date: "2 days ago", text: "Sarah received her admission letter to St. Mary's Secondary School!" },
-        { date: "1 week ago", text: "50% of the goal reached - thank you for your generous support!" },
-        { date: "2 weeks ago", text: "Campaign launched - help Sarah achieve her dream" }
-      ]
-    },
-    "2": {
-      title: "Medical Care Fund",
-      child: "David, 8",
-      fullStory: `David is an 8-year-old boy who needs ongoing medical treatment for a treatable condition. With proper care, David can live a healthy and fulfilling life.`,
-      image: childImage1,
-      raised: 1200,
-      goal: 2000,
-      supporters: 25,
-      daysLeft: 15,
-      category: "Healthcare",
-      updates: [
-        { date: "1 week ago", text: "Treatment plan approved by medical team" },
-        { date: "2 weeks ago", text: "Campaign launched" }
-      ]
-    },
-    "3": {
-      title: "Skills Training Program",
-      child: "Grace, 16",
-      fullStory: `Grace wants to learn vocational skills to support her younger siblings. Help us provide the training she needs for a brighter future.`,
-      image: childImage1,
-      raised: 800,
-      goal: 1500,
-      supporters: 18,
-      daysLeft: 30,
-      category: "Skills",
-      updates: [
-        { date: "3 days ago", text: "Grace enrolled in skills training program" },
-        { date: "1 week ago", text: "Campaign launched" }
-      ]
-    }
-  };
-
-  return campaigns[id] || null;
-};
-
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const campaign = getCampaignData(params.id);
+  const language = await getServerLanguage();
+  const campaign = await getCampaign(params.id, language);
 
-  if (!campaign) {
+  if (!campaign || campaign.status !== 'active') {
     return {
       title: "Campaign Not Found | Chosen Arrows Foundation",
       description: "The campaign you're looking for doesn't exist.",
     };
   }
 
-  const progress = Math.round((campaign.raised / campaign.goal) * 100);
-  const imageUrl = typeof campaign.image === 'string' 
-    ? campaign.image 
-    : campaign.image.src;
+  const pageMetadata = await getPageMetadata(`/campaigns/${campaign.slug}`, language);
+  const progress = Math.round((campaign.raised_amount / campaign.goal_amount) * 100);
+  const childName = campaign.translation?.child_name || '';
+  const childAge = campaign.translation?.child_age;
+  const child = childAge ? `${childName}, ${childAge}` : childName;
+  const fullStory = campaign.translation?.full_story || campaign.translation?.story || '';
+  const title = campaign.translation?.title || 'Campaign';
+
+  const defaultDescription = `${child} - ${fullStory.substring(0, 150)}... Help us reach our goal of $${campaign.goal_amount.toLocaleString()}. ${progress}% funded.`;
 
   return {
-    title: `${campaign.title} | Chosen Arrows Foundation`,
-    description: `${campaign.child} - ${campaign.fullStory.split('\n\n')[0].substring(0, 150)}... Help us reach our goal of $${campaign.goal.toLocaleString()}. ${progress}% funded.`,
-    keywords: [campaign.category.toLowerCase(), "campaign", "donate", "fundraising", campaign.child.split(',')[0].toLowerCase()],
+    title: pageMetadata?.title || `${title} | Chosen Arrows Foundation`,
+    description: pageMetadata?.description || defaultDescription,
+    keywords: pageMetadata?.keywords || [campaign.category?.toLowerCase() || 'campaign', "donate", "fundraising", childName.toLowerCase()],
     openGraph: {
-      title: `${campaign.title} | Chosen Arrows Foundation`,
-      description: `Support ${campaign.child} - ${campaign.fullStory.split('\n\n')[0].substring(0, 150)}...`,
-      type: "website",
-      images: [
+      title: pageMetadata?.og_title || pageMetadata?.title || `${title} | Chosen Arrows Foundation`,
+      description: pageMetadata?.og_description || pageMetadata?.description || `Support ${child} - ${fullStory.substring(0, 150)}...`,
+      type: pageMetadata?.og_type || "website",
+      images: campaign.primaryImage ? [
         {
-          url: imageUrl,
+          url: campaign.primaryImage,
           width: 1200,
           height: 630,
-          alt: campaign.child,
+          alt: child,
         },
-      ],
+      ] : pageMetadata?.og_image_url ? [{ url: pageMetadata.og_image_url }] : undefined,
     },
     twitter: {
-      card: "summary_large_image",
-      title: `${campaign.title} | Chosen Arrows Foundation`,
-      description: `Support ${campaign.child} - ${progress}% funded. Help us reach $${campaign.goal.toLocaleString()}`,
-      images: [imageUrl],
+      card: pageMetadata?.twitter_card || "summary_large_image",
+      title: pageMetadata?.twitter_title || pageMetadata?.title || `${title} | Chosen Arrows Foundation`,
+      description: pageMetadata?.twitter_description || pageMetadata?.description || `Support ${child} - ${progress}% funded. Help us reach $${campaign.goal_amount.toLocaleString()}`,
+      images: campaign.primaryImage ? [campaign.primaryImage] : pageMetadata?.twitter_image_url ? [pageMetadata.twitter_image_url] : undefined,
     },
   };
 }
 
-export default function CampaignDetailPage({ params }: { params: { id: string } }) {
-  const campaign = getCampaignData(params.id);
+export default async function CampaignDetailPage({ params }: { params: { id: string } }) {
+  const language = await getServerLanguage();
+  const campaign = await getCampaign(params.id, language);
 
-  if (!campaign) {
+  if (!campaign || campaign.status !== 'active') {
     notFound();
   }
 
-  return <CampaignDetailClient campaign={campaign} />;
+  // Fetch campaign updates
+  const updatesRaw = await getCampaignUpdates(campaign.id).catch(() => []);
+  
+  // Transform updates to match component format
+  const updates = updatesRaw.map(update => ({
+    date: formatUpdateDate(update.update_date),
+    text: update.content,
+  }));
+
+  // Format child name and age
+  const childName = campaign.translation?.child_name || '';
+  const childAge = campaign.translation?.child_age;
+  const child = childAge ? `${childName}, ${childAge}` : childName;
+
+  // Transform campaign data to match component format
+  const campaignData = {
+    title: campaign.translation?.title || '',
+    child,
+    fullStory: campaign.translation?.full_story || campaign.translation?.story || '',
+    image: campaign.primaryImage || '',
+    raised: campaign.raised_amount,
+    goal: campaign.goal_amount,
+    supporters: campaign.donor_count,
+    daysLeft: campaign.days_left || 0,
+    category: campaign.category || '',
+    updates,
+  };
+
+  return <CampaignDetailClient campaign={campaignData} />;
 }

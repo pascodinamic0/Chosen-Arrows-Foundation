@@ -5,10 +5,24 @@ import { ArrowRight, Heart, Users, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
-const CTASection = () => {
+type CTAContent = {
+  title?: string;
+  subtitle?: string;
+  mainCta?: string;
+  items?: Array<{
+    title: string;
+    description: string;
+    action: string;
+    href?: string;
+  }>;
+};
+
+const iconList = [DollarSign, Users, Heart];
+
+const CTASection = ({ content }: { content?: CTAContent }) => {
   const { t } = useTranslation();
 
-  const ctaItems = [
+  const fallbackItems = [
     {
       icon: DollarSign,
       titleKey: "cta.giveOnce",
@@ -29,63 +43,82 @@ const CTASection = () => {
     },
   ];
 
-  return (
-    <section className="py-24 md:py-40 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 relative overflow-hidden">
-      {/* Background Decoration */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" />
-      </div>
+  const ctaItems = content?.items?.length
+    ? content.items.map((item, index) => ({
+        icon: iconList[index % iconList.length],
+        title: item.title,
+        description: item.description,
+        action: item.action,
+        href: item.href,
+      }))
+    : fallbackItems.map((item) => ({
+        ...item,
+        title: t(item.titleKey),
+        description: t(item.descKey),
+        action: t(item.actionKey),
+      }));
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+  const title = content?.title ?? t("cta.title");
+
+  return (
+    <section id="cta" className="section-padding bg-gradient-to-br from-mint-50 via-white to-taffy-50/50">
+      <div className="enterprise-container">
         {/* Main CTA */}
-        <div className="max-w-4xl mx-auto text-center space-y-10 mb-20 animate-fade-in">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
-            {t('cta.title').split('Eternal')[0]}
-            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent drop-shadow-sm">
-              {t('cta.title').includes('Eternal') ? t('cta.title').match(/Eternal.*$/)?.[0] : t('cta.title').split(' ').slice(-1).join(' ')}
-            </span>
-          </h2>
-          <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed font-medium">
-            {t('cta.subtitle')}
+        <div className="max-w-2xl mx-auto text-center mb-12 md:mb-16">
+          <h2 className="mb-4 text-foreground text-balance">{title}</h2>
+          <p className="text-muted-foreground text-lg mb-8">
+            {content?.subtitle ?? t("cta.subtitle")}
           </p>
           <Link href="/donate">
             <Button
               size="lg"
-              className="text-lg px-12 py-8 bg-gradient-to-r from-primary to-secondary hover:opacity-95 transition-all hover:scale-[1.02] shadow-2xl shadow-primary/30 hover:shadow-primary/40 font-bold tracking-wide"
+              variant="gradient"
+              className="px-10 rounded-full"
             >
-              {t('cta.mainCta')}
-              <ArrowRight className="ml-2 w-6 h-6" />
+              {content?.mainCta ?? t("cta.mainCta")}
+              <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
           </Link>
         </div>
 
-        {/* Ways to Support */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {/* Ways to Support Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
           {ctaItems.map((item, index) => {
             const Icon = item.icon;
+            const href =
+              item.href ||
+              (content?.items?.length
+                ? "/donate"
+                : item.titleKey.includes("giveOnce")
+                ? "/donate"
+                : item.titleKey.includes("Mentor")
+                ? "/mentorship"
+                : "/donate");
+            
             return (
               <div
-                key={item.titleKey}
-                className="group p-8 rounded-xl bg-card border border-border/60 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 animate-fade-in-up"
-                style={{ animationDelay: `${index * 150}ms` }}
+                key={content?.items?.length ? `${item.title}-${index}` : item.titleKey}
+                className="enterprise-card p-6 hover-lift group"
               >
-                <div className="space-y-5">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground">{t(item.titleKey)}</h3>
-                  <p className="text-foreground/75 leading-relaxed font-medium">{t(item.descKey)}</p>
-                  <Link href={item.titleKey.includes("giveOnce") ? "/donate" : item.titleKey.includes("Mentor") ? "/mentorship" : "/donate"}>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-between text-primary hover:text-primary-foreground hover:bg-primary group-hover:translate-x-1 transition-transform font-semibold"
-                    >
-                      {t(item.actionKey)}
-                      <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </Link>
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-taffy-100 to-mint-100 flex items-center justify-center mb-4 group-hover:from-taffy-200 group-hover:to-mint-200 transition-colors duration-200">
+                  <Icon className="w-5 h-5 text-taffy-500" />
                 </div>
+                <h3 className="text-base font-semibold text-foreground mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  {item.description}
+                </p>
+                <Link href={href}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="w-full justify-between text-taffy-500 hover:text-taffy-600 hover:bg-taffy-50 font-medium rounded-lg transition-colors duration-150"
+                  >
+                    {item.action}
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
               </div>
             );
           })}

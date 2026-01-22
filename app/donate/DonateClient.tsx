@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -144,19 +142,16 @@ export default function DonateClient() {
   };
 
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      
-      <main className="pt-24 pb-20">
+    <main className="pt-24 pb-20">
         {/* Header */}
-        <section className="py-12 bg-gradient-to-b from-primary/5 to-background">
+        <section className="py-12 bg-gradient-to-b from-taffy-50 via-mint-50/30 to-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4">
+              <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-taffy-400 to-mint-400 flex items-center justify-center mb-4 shadow-lg shadow-taffy-400/25">
                 <Heart className="w-8 h-8 text-white" fill="currentColor" />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold">
-                Make a <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Difference</span>
+                Make a <span className="bg-gradient-to-r from-taffy-500 to-mint-500 bg-clip-text text-transparent">Difference</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground">
                 Your generosity changes lives. Every donation helps guide a child toward their divine destiny.
@@ -322,7 +317,8 @@ export default function DonateClient() {
                       <Button
                         type="submit"
                         disabled={isPending}
-                        className="w-full h-14 text-lg bg-gradient-to-r from-primary to-secondary hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                        variant="gradient"
+                        className="w-full h-14 text-lg rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isPending ? (
                           <>
@@ -348,15 +344,15 @@ export default function DonateClient() {
               </Form>
 
               {/* Impact Message */}
-              <Card className="mt-6 bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
+              <Card className="mt-6 bg-gradient-to-br from-mint-50 to-taffy-50/50 border-mint-200/50">
                 <CardContent className="p-6 text-center">
                   <p className="text-lg font-medium">
                     ${selectedAmount} {form.watch("frequency") === "monthly" ? "monthly" : ""} can provide:
                   </p>
                   <ul className="mt-4 space-y-2 text-muted-foreground">
-                    <li>✓ School supplies for 2 children</li>
-                    <li>✓ Weekly meals for 5 children</li>
-                    <li>✓ Medical checkup for 1 child</li>
+                    <li className="flex items-center justify-center gap-2"><span className="text-mint-500">✓</span> School supplies for 2 children</li>
+                    <li className="flex items-center justify-center gap-2"><span className="text-taffy-500">✓</span> Weekly meals for 5 children</li>
+                    <li className="flex items-center justify-center gap-2"><span className="text-mint-500">✓</span> Medical checkup for 1 child</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -364,8 +360,5 @@ export default function DonateClient() {
           </div>
         </section>
       </main>
-
-      <Footer />
-    </div>
   );
 }

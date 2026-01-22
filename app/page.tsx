@@ -1,41 +1,108 @@
 import type { Metadata } from "next";
-import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
+import ScrollLockHero from "@/components/ScrollLockHero";
 import ValuesSection from "@/components/ValuesSection";
-import CampaignsSection from "@/components/CampaignsSection";
 import ImpactSection from "@/components/ImpactSection";
+import CampaignsSection from "@/components/CampaignsSection";
 import CommunitySection from "@/components/CommunitySection";
 import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
+import { getContent } from "@/app/actions/content/get-content";
+import { getCampaigns } from "@/app/actions/campaigns/get-campaigns";
+import { getTestimonials } from "@/app/actions/testimonials/get-testimonials";
+import { getSetting } from "@/app/actions/settings/get-settings";
+import { getServerLanguage } from "@/lib/i18n";
+import { getPageMetadata } from "@/app/actions/metadata/get-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Home | Chosen Arrows Foundation",
-  description: "Empowering children and communities through education and mentorship. Join us in guiding children toward their divine destiny.",
-  keywords: ["children", "education", "mentorship", "charity", "foundation", "community"],
-  openGraph: {
-    title: "Chosen Arrows Foundation",
-    description: "Empowering children and communities through education and mentorship",
-    type: "website",
-    siteName: "Chosen Arrows Foundation",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Chosen Arrows Foundation",
-    description: "Empowering children and communities through education and mentorship",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const language = await getServerLanguage();
+  const metadata = await getPageMetadata('/', language);
 
-export default function HomePage() {
+  if (metadata) {
+    return {
+      title: metadata.title || "Home | Chosen Arrows Foundation",
+      description: metadata.description || "A five-scene, story-driven journey that turns a child's present into a clear decision.",
+      keywords: metadata.keywords || ["crowdfunding", "children", "education", "decision", "relief"],
+      openGraph: {
+        title: metadata.og_title || metadata.title || "Chosen Arrows Foundation",
+        description: metadata.og_description || metadata.description || "A five-scene, story-driven journey that turns a child's present into a clear decision.",
+        type: metadata.og_type || "website",
+        images: metadata.og_image_url ? [{ url: metadata.og_image_url }] : undefined,
+        siteName: "Chosen Arrows Foundation",
+      },
+      twitter: {
+        card: metadata.twitter_card || "summary_large_image",
+        title: metadata.twitter_title || metadata.title || "Chosen Arrows Foundation",
+        description: metadata.twitter_description || metadata.description || "A five-scene, story-driven journey that turns a child's present into a clear decision.",
+        images: metadata.twitter_image_url ? [metadata.twitter_image_url] : undefined,
+      },
+    };
+  }
+
+  // Fallback metadata
+  return {
+    title: "Home | Chosen Arrows Foundation",
+    description: "A five-scene, story-driven journey that turns a child's present into a clear decision.",
+    keywords: ["crowdfunding", "children", "education", "decision", "relief"],
+    openGraph: {
+      title: "Chosen Arrows Foundation",
+      description: "A five-scene, story-driven journey that turns a child's present into a clear decision.",
+      type: "website",
+      siteName: "Chosen Arrows Foundation",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Chosen Arrows Foundation",
+      description: "A five-scene, story-driven journey that turns a child's present into a clear decision.",
+    },
+  };
+}
+
+export default async function HomePage() {
+  const language = await getServerLanguage();
+  
+  // Fetch all content in parallel
+  const [heroContent, valuesContent, impactContent, communityContent, ctaContent, campaignsRaw, testimonials, heroStats] = await Promise.all([
+    getContent('hero', language).catch(() => null),
+    getContent('values', language).catch(() => null),
+    getContent('impact', language).catch(() => null),
+    getContent('community', language).catch(() => null),
+    getContent('cta', language).catch(() => null),
+    getCampaigns(language, { limit: 2 }).catch(() => []),
+    getTestimonials({ activeOnly: true }).catch(() => []),
+    getSetting('hero_stats').catch(() => null),
+  ]);
+
+  // Transform campaigns to match CampaignsSection expected format
+  const campaigns = campaignsRaw.map(campaign => ({
+    id: campaign.id,
+    name: campaign.translation?.title || '',
+    age: campaign.translation?.child_age || null,
+    location: campaign.translation?.location || null,
+    story: campaign.translation?.story || '',
+    image: campaign.primaryImage || undefined,
+    goal: campaign.goal_amount,
+    raised: campaign.raised_amount,
+    donors: campaign.donor_count,
+    daysLeft: campaign.days_left,
+  }));
+
+  // Merge hero stats from settings into hero content
+  const heroContentWithStats = heroContent && heroStats ? {
+    ...heroContent,
+    stats: {
+      ...heroContent.stats,
+      ...heroStats,
+    }
+  } : heroContent;
+
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      <Hero />
-      <CommunitySection />
-      <ImpactSection />
-      <CampaignsSection />
-      <ValuesSection />
-      <CTASection />
-      <Footer />
-    </div>
+    <main className="bg-background text-foreground">
+      {/* Scroll-locked Hero Section */}
+      <ScrollLockHero content={heroContentWithStats} />
+      <ValuesSection content={valuesContent} />
+      <ImpactSection content={impactContent} />
+      <CampaignsSection campaigns={campaigns} />
+      <CommunitySection content={communityContent} testimonials={testimonials} />
+      <CTASection content={ctaContent} />
+    </main>
   );
 }

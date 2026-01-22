@@ -18,7 +18,7 @@
   },
   "values": {
     "title": "Our Core Values",
-    "subtitle": "R.I.T.A.H",
+    "subtitle": "R.I.T.A.H + Community",
     "description": "Guiding principles that shape everything we do and every life we touch",
     "responsibility": "Responsibility",
     "responsibilityDesc": "We care for every child entrusted to us with compassion and accountability.",
@@ -30,6 +30,8 @@
     "adeptnessDesc": "We serve with excellence, always learning and growing in purpose.",
     "honesty": "Honesty",
     "honestyDesc": "We speak truth in love — reflecting the nature and light of God.",
+    "community": "Community",
+    "communityDesc": "We nurture belonging and connection, building a family of support around every child.",
     "vision": "Our Vision",
     "visionQuote": "Just like arrows in the hands of a skilled archer, we aim to guide the children God entrusts to us toward the direction of their ordained destinies."
   },
@@ -60,8 +62,8 @@
     "donorsDesc": "Partners in hope",
     "successRate": "Success Rate",
     "successDesc": "Reaching milestones",
-    "countries": "Countries Served",
-    "countriesDesc": "Kenya & Uganda",
+    "countries": "Country Served",
+    "countriesDesc": "Kenya",
     "transparencyTitle": "Transparency in Every Step",
     "transparencyDesc": "We believe in complete transparency. Every donation is tracked, every milestone is documented, and every success story is shared. You don't just give — you witness the transformation.",
     "realTime": "Real-time Updates",

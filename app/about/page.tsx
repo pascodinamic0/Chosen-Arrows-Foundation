@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import Image from "next/image";
 import { Target, Sparkles } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -15,18 +14,27 @@ export const metadata: Metadata = {
   },
 };
 
+// Image gallery data - each image used only once
+const galleryImages = [
+  { src: "/about/Image with the kids .jpeg", alt: "Our children together", span: "col-span-2 row-span-2" },
+  { src: "/about/Winnie's image with a kid .jpeg", alt: "One-on-one mentorship", span: "col-span-1 row-span-1" },
+  { src: "/about/Entre image.jpeg", alt: "Welcome to our community", span: "col-span-1 row-span-1" },
+  { src: "/about/Image 1.jpeg", alt: "Making a difference", span: "col-span-1 row-span-1" },
+  { src: "/about/Image 2.jpeg", alt: "Growing stronger", span: "col-span-1 row-span-1" },
+  { src: "/about/Banner kind image.jpeg", alt: "Community impact", span: "col-span-2 row-span-1" },
+  { src: "/about/Image 3.jpeg", alt: "Hope for tomorrow", span: "col-span-1 row-span-1" },
+  { src: "/about/Winnie image with a kid 2.jpeg", alt: "Building futures together", span: "col-span-1 row-span-1" },
+];
+
 export default function AboutPage() {
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      
-      <main className="pt-24 pb-20">
+    <main className="pt-24 pb-20">
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-b from-primary/5 to-background">
+        <section className="py-20 bg-gradient-to-b from-taffy-50 via-mint-50/30 to-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-                About <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">Chosen Arrows</span>
+                About <span className="bg-gradient-to-r from-taffy-500 to-mint-500 bg-clip-text text-transparent">Chosen Arrows</span>
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
                 Just like arrows in the hands of a skilled archer, we aim to guide the children God 
@@ -40,9 +48,9 @@ export default function AboutPage() {
         <section className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              <Card className="border-primary/20">
+              <Card className="border-taffy-200/50 hover:shadow-lg hover:shadow-taffy-100/50 transition-shadow duration-300">
                 <CardContent className="p-8 space-y-4">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-taffy-400 to-taffy-500 flex items-center justify-center shadow-lg shadow-taffy-400/25">
                     <Target className="w-8 h-8 text-white" />
                   </div>
                   <h2 className="text-3xl font-bold">Our Mission</h2>
@@ -54,9 +62,9 @@ export default function AboutPage() {
                 </CardContent>
               </Card>
 
-              <Card className="border-secondary/20">
+              <Card className="border-mint-200/50 hover:shadow-lg hover:shadow-mint-100/50 transition-shadow duration-300">
                 <CardContent className="p-8 space-y-4">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-secondary to-accent flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-mint-400 to-mint-500 flex items-center justify-center shadow-lg shadow-mint-400/25">
                     <Sparkles className="w-8 h-8 text-white" />
                   </div>
                   <h2 className="text-3xl font-bold">Our Vision</h2>
@@ -72,10 +80,12 @@ export default function AboutPage() {
         </section>
 
         {/* Story Section */}
-        <section className="py-20 bg-gradient-to-b from-muted/20 to-background">
+        <section className="py-20 bg-gradient-to-b from-mint-50/30 to-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto space-y-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-center">Our Story</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-center">
+                Our <span className="text-mint-500">Story</span>
+              </h2>
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                 <p>
                   Founded on the biblical principle that children are like arrows in the hands of a warrior 
@@ -98,22 +108,58 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Impact Stats */}
-        <section className="py-20">
+        {/* Image Gallery Grid */}
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-10">
+                Our <span className="text-taffy-500">Journey</span> in Pictures
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[150px] md:auto-rows-[180px]">
+                {galleryImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`relative overflow-hidden rounded-xl group ${image.span}`}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <p className="text-white text-xs md:text-sm font-medium">
+                        {image.alt}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Impact Stats */}
+        <section className="py-20 bg-gradient-to-br from-taffy-50/50 via-white to-mint-50/50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-center mb-10">
+              Our <span className="text-taffy-500">Impact</span>
+            </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
               {[
-                { value: "500+", label: "Children Supported" },
-                { value: "15", label: "Communities Served" },
-                { value: "100+", label: "Mentors" },
-                { value: "98%", label: "Success Rate" }
+                { value: "500+", label: "Children Supported", color: "text-taffy-500" },
+                { value: "15", label: "Communities Served", color: "text-mint-500" },
+                { value: "100+", label: "Mentors", color: "text-taffy-500" },
+                { value: "98%", label: "Success Rate", color: "text-mint-500" }
               ].map((stat, index) => (
-                <Card key={index} className="text-center">
+                <Card key={index} className="text-center border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white/80 backdrop-blur-sm">
                   <CardContent className="p-6 space-y-2">
-                    <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    <div className={`text-4xl md:text-5xl font-bold ${stat.color}`}>
                       {stat.value}
                     </div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                    <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
                   </CardContent>
                 </Card>
               ))}
@@ -121,8 +167,5 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
-    </div>
   );
 }

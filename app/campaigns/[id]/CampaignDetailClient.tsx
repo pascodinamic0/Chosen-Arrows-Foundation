@@ -1,7 +1,5 @@
 "use client";
 
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -28,10 +26,7 @@ export default function CampaignDetailClient({ campaign }: CampaignDetailClientP
   const progress = (campaign.raised / campaign.goal) * 100;
 
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      
-      <main className="pt-24 pb-20">
+    <main className="pt-24 pb-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-3 gap-8">
@@ -114,12 +109,12 @@ export default function CampaignDetailClient({ campaign }: CampaignDetailClientP
                       </div>
                     </div>
 
-                    <Button className="w-full h-12 bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-lg">
+                    <Button variant="gradient" className="w-full h-12 text-lg rounded-full">
                       <Heart className="w-5 h-5 mr-2" fill="currentColor" />
                       Donate Now
                     </Button>
 
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outline" className="w-full rounded-full">
                       <Share2 className="w-4 h-4 mr-2" />
                       Share Campaign
                     </Button>
@@ -141,8 +136,5 @@ export default function CampaignDetailClient({ campaign }: CampaignDetailClientP
           </div>
         </div>
       </main>
-
-      <Footer />
-    </div>
   );
 }

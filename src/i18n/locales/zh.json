@@ -18,7 +18,7 @@
   },
   "values": {
     "title": "我们的核心价值观",
-    "subtitle": "R.I.T.A.H",
+    "subtitle": "R.I.T.A.H + 社区",
     "description": "指导我们所做的一切和我们触及的每一个生命的原则",
     "responsibility": "责任",
     "responsibilityDesc": "我们以同情心和责任心照顾托付给我们的每一个孩子。",
@@ -30,6 +30,8 @@
     "adeptnessDesc": "我们以卓越的态度服务，始终在目标中学习和成长。",
     "honesty": "正直",
     "honestyDesc": "我们以爱说真话——反映上帝的本性和光芒。",
+    "community": "社区",
+    "communityDesc": "我们培养归属感和联系，为每个孩子建立一个支持家庭。",
     "vision": "我们的愿景",
     "visionQuote": "就像技艺精湛的弓箭手手中的箭一样，我们的目标是引导上帝托付给我们的孩子走向他们注定的命运方向。"
   },
@@ -60,8 +62,8 @@
     "donorsDesc": "希望的伙伴",
     "successRate": "成功率",
     "successDesc": "达到里程碑",
-    "countries": "服务的国家",
-    "countriesDesc": "肯尼亚和乌干达",
+    "countries": "服务国家",
+    "countriesDesc": "肯尼亚",
     "transparencyTitle": "每一步都透明",
     "transparencyDesc": "我们相信完全透明。每一笔捐款都被追踪，每一个里程碑都被记录，每一个成功故事都被分享。你不仅仅是给予——你见证转变。",
     "realTime": "实时更新",

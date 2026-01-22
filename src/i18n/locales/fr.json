@@ -18,7 +18,7 @@
   },
   "values": {
     "title": "Nos valeurs fondamentales",
-    "subtitle": "R.I.T.A.H",
+    "subtitle": "R.I.T.A.H + Communauté",
     "description": "Principes directeurs qui façonnent tout ce que nous faisons et chaque vie que nous touchons",
     "responsibility": "Responsabilité",
     "responsibilityDesc": "Nous prenons soin de chaque enfant qui nous est confié avec compassion et responsabilité.",
@@ -30,6 +30,8 @@
     "adeptnessDesc": "Nous servons avec excellence, apprenant et grandissant toujours dans un but précis.",
     "honesty": "Honnêteté",
     "honestyDesc": "Nous disons la vérité avec amour — reflétant la nature et la lumière de Dieu.",
+    "community": "Communauté",
+    "communityDesc": "Nous favorisons l'appartenance et la connexion, construisant une famille de soutien autour de chaque enfant.",
     "vision": "Notre vision",
     "visionQuote": "Tout comme des flèches dans les mains d'un archer qualifié, nous visons à guider les enfants que Dieu nous confie vers la direction de leurs destins ordonnés."
   },
@@ -60,8 +62,8 @@
     "donorsDesc": "Partenaires d'espoir",
     "successRate": "Taux de réussite",
     "successDesc": "Atteindre les jalons",
-    "countries": "Pays servis",
-    "countriesDesc": "Kenya et Ouganda",
+    "countries": "Pays servi",
+    "countriesDesc": "Kenya",
     "transparencyTitle": "Transparence à chaque étape",
     "transparencyDesc": "Nous croyons en une transparence totale. Chaque don est suivi, chaque jalon est documenté et chaque histoire de réussite est partagée. Vous ne donnez pas seulement — vous êtes témoin de la transformation.",
     "realTime": "Mises à jour en temps réel",

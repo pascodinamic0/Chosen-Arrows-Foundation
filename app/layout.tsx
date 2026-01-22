@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Providers } from "@/components/Providers";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { getSetting } from "@/app/actions/settings/get-settings";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -44,15 +47,28 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Fetch footer data in parallel
+  const [contactInfo, socialLinks] = await Promise.all([
+    getSetting('contact_info').catch(() => null),
+    getSetting('social_links').catch(() => null),
+  ]);
+
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
-        <Providers>{children}</Providers>
+      <body className="antialiased">
+        <Providers>
+          <Navigation />
+          {children}
+          <Footer 
+            contactInfo={contactInfo as any}
+            socialLinks={socialLinks as any}
+          />
+        </Providers>
       </body>
     </html>
   );

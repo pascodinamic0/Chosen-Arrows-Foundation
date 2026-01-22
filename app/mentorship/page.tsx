@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,10 +42,7 @@ const benefits = [
 
 export default function MentorshipPage() {
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      
-      <main className="pt-24 pb-20">
+    <main className="pt-24 pb-20">
         {/* Header */}
         <section className="py-12 bg-gradient-to-b from-primary/5 to-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -146,7 +141,7 @@ export default function MentorshipPage() {
                     </div>
                   </div>
 
-                  <Button className="w-full h-12 bg-gradient-to-r from-primary to-secondary hover:opacity-90">
+                  <Button variant="gradient" className="w-full h-12 rounded-full">
                     <CheckCircle className="w-5 h-5 mr-2" />
                     Submit Application
                   </Button>
@@ -160,8 +155,5 @@ export default function MentorshipPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
-    </div>
   );
 }
