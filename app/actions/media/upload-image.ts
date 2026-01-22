@@ -32,7 +32,7 @@ export async function uploadImage(
     return { success: false, error: 'File size exceeds 5MB limit.' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
   const finalFileName = fileName || `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`
   const filePath = `${folder}/${finalFileName}`
 

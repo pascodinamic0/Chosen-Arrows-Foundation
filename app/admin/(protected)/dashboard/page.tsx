@@ -11,7 +11,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 export default async function AdminDashboardPage() {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // Get stats
   const [campaignsResult, sectionsResult, testimonialsResult, recentActivityResult] = await Promise.all([

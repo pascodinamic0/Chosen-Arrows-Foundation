@@ -28,7 +28,7 @@ export async function createTestimonial(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // Generate avatar initials if not provided
   const avatarInitials = data.avatar_initials || 

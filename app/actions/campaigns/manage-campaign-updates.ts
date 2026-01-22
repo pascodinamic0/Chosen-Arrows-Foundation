@@ -23,7 +23,7 @@ export type ManageCampaignUpdateResult =
 export async function getCampaignUpdates(
   campaignId: string
 ): Promise<CampaignUpdate[]> {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data, error } = await supabase
     .from('campaign_updates')
@@ -59,7 +59,7 @@ export async function createCampaignUpdate(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data, error } = await supabase
     .from('campaign_updates')
@@ -96,7 +96,7 @@ export async function updateCampaignUpdate(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { error } = await supabase
     .from('campaign_updates')
@@ -128,7 +128,7 @@ export async function deleteCampaignUpdate(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { error } = await supabase
     .from('campaign_updates')

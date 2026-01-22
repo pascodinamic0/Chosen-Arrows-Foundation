@@ -13,7 +13,7 @@ export default async function AuditLogPage({
     redirect('/admin/login')
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // Build query
   let query = supabase

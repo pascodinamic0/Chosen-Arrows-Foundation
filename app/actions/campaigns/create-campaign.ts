@@ -39,7 +39,7 @@ export async function createCampaign(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // Create campaign
   const { data: campaign, error: campaignError } = await supabase

@@ -21,7 +21,7 @@ export async function updateTestimonial(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const updateData: any = {}
 

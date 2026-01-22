@@ -8,7 +8,7 @@ import { createClient } from '@/lib/supabase/server'
  * @returns The public URL from Supabase Storage or the original path as fallback
  */
 export async function getImageUrl(originalPath: string): Promise<string | null> {
-  const supabase = createClient()
+  const supabase = await createClient()
   
   const { data, error } = await supabase
     .from('static_image_mapping')
@@ -29,7 +29,7 @@ export async function getImageUrl(originalPath: string): Promise<string | null> 
  * Useful for batch fetching.
  */
 export async function getImageUrls(originalPaths: string[]): Promise<Record<string, string | null>> {
-  const supabase = createClient()
+  const supabase = await createClient()
   
   const { data, error } = await supabase
     .from('static_image_mapping')

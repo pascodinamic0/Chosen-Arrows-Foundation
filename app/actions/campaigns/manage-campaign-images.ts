@@ -22,7 +22,7 @@ export async function addCampaignImage(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // If setting as primary, unset other primary images
   if (isPrimary) {
@@ -81,7 +81,7 @@ export async function updateCampaignImage(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // If setting as primary, unset other primary images
   if (updates.is_primary) {
@@ -120,7 +120,7 @@ export async function deleteCampaignImage(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // Delete from database
   const { error: dbError } = await supabase

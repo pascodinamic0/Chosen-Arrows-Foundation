@@ -22,7 +22,7 @@ export async function listImages(
     return []
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data, error } = await supabase.storage
     .from('images')

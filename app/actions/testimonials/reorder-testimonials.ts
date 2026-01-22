@@ -19,7 +19,7 @@ export async function reorderTestimonials(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // Update display_order for each testimonial
   const updates = testimonialIds.map((id, index) => ({

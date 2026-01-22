@@ -35,7 +35,7 @@ export async function updatePageMetadata(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { error } = await supabase
     .from('page_metadata')

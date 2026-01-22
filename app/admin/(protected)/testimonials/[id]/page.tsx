@@ -7,7 +7,7 @@ export default async function EditTestimonialPage({
 }: {
   params: { id: string }
 }) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data: testimonial, error } = await supabase
     .from('testimonials')

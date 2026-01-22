@@ -21,7 +21,7 @@ export async function updateSetting(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { error } = await supabase
     .from('site_settings')
@@ -55,7 +55,7 @@ export async function updateMultipleSettings(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const updates = settings.map(setting => ({
     setting_key: setting.key,

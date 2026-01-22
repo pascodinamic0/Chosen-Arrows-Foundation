@@ -18,7 +18,7 @@ export async function deleteImage(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { error } = await supabase.storage
     .from('images')

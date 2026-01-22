@@ -70,7 +70,7 @@ export async function adminLoginAndRedirect(formData: FormData) {
     redirect(result.redirect)
   } else {
     // Redirect back to login with error
-    redirect(`/admin/login?error=${encodeURIComponent(result.error)}`)
+    redirect(`/admin/login?error=${encodeURIComponent((result as { success: false; error: string }).error)}`)
   }
 }
 

@@ -19,7 +19,7 @@ export async function deleteTestimonial(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { error } = await supabase
     .from('testimonials')

@@ -21,7 +21,7 @@ export default async function EditCampaignPage({
   }
 
   // Fetch campaign images
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data: images } = await supabase
     .from('campaign_images')
     .select('*')

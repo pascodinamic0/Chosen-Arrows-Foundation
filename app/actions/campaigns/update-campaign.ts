@@ -21,7 +21,7 @@ export async function updateCampaign(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // Update campaign basic info
   const campaignUpdate: any = {
