@@ -17,6 +17,15 @@ export async function getSetting(
   settingKey: string
 ): Promise<Record<string, any> | null> {
   try {
+    // Check if we have the required environment variables
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      console.warn(`Cannot fetch setting "${settingKey}": Missing Supabase environment variables`)
+      return null
+    }
+
     const supabase = await createClient()
 
     const { data, error } = await supabase
