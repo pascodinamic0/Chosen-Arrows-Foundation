@@ -23,19 +23,25 @@ export async function getSetting(
       .from('site_settings')
       .select('setting_value')
       .eq('setting_key', settingKey)
-      .single()
+      .limit(1)
 
     if (error) {
       console.warn(`Failed to fetch setting "${settingKey}":`, error.message)
       return null
     }
 
-    if (!data) {
+    if (!data || data.length === 0) {
       console.warn(`Setting "${settingKey}" not found`)
       return null
     }
 
-    return data.setting_value
+    // If multiple settings exist (shouldn't happen due to unique constraint),
+    // return the first one and log a warning
+    if (data.length > 1) {
+      console.warn(`Multiple settings found for "${settingKey}", using first one`)
+    }
+
+    return data[0].setting_value
   } catch (error) {
     console.error(`Error fetching setting "${settingKey}":`, error)
     return null

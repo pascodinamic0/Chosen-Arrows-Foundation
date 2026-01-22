@@ -50,6 +50,33 @@ async function testConnection() {
     } else {
       console.log('✅ Supabase connection successful')
     }
+
+    // Check for required site settings
+    console.log('\n🔧 Checking required site settings...')
+    const requiredSettings = ['contact_info', 'social_links', 'hero_stats']
+    let missingSettings = []
+
+    for (const settingKey of requiredSettings) {
+      const { data: settingData, error: settingError } = await supabase
+        .from('site_settings')
+        .select('setting_value')
+        .eq('setting_key', settingKey)
+        .limit(1)
+
+      if (settingError) {
+        console.log(`❌ Error checking setting "${settingKey}": ${settingError.message}`)
+      } else if (!settingData || settingData.length === 0) {
+        console.log(`❌ Setting "${settingKey}" not found`)
+        missingSettings.push(settingKey)
+      } else {
+        console.log(`✅ Setting "${settingKey}" exists`)
+      }
+    }
+
+    if (missingSettings.length > 0) {
+      console.log(`\n⚠️  Missing settings: ${missingSettings.join(', ')}`)
+      console.log('   Run: npm run seed-settings')
+    }
   } catch (error) {
     console.log(`❌ Supabase client creation failed: ${error}`)
   }
