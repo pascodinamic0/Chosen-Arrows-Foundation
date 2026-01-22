@@ -59,7 +59,7 @@ export default function CampaignImageManager({
 
       if (!uploadResult.success) {
         toast.error('Upload failed', {
-          description: uploadResult.error,
+          description: (uploadResult as { success: false; error: string }).error,
         })
         return
       }
@@ -81,7 +81,7 @@ export default function CampaignImageManager({
         window.location.reload()
       } else {
         toast.error('Failed to add image', {
-          description: addResult.error,
+          description: (addResult as { success: false; error: string }).error,
         })
       }
     } catch (error) {
@@ -107,7 +107,7 @@ export default function CampaignImageManager({
       window.location.reload()
     } else {
       toast.error('Failed to update', {
-        description: result.error,
+        description: (result as { success: false; error: string }).error,
       })
     }
   }
@@ -123,7 +123,7 @@ export default function CampaignImageManager({
       onImagesChange?.()
     } else {
       toast.error('Failed to update', {
-        description: result.error,
+        description: (result as { success: false; error: string }).error,
       })
     }
   }
@@ -138,7 +138,7 @@ export default function CampaignImageManager({
       window.location.reload()
     } else {
       toast.error('Failed to delete', {
-        description: result.error,
+        description: (result as { success: false; error: string }).error,
       })
     }
   }

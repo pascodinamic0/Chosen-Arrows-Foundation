@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Switch } from '@/components/ui/switch'
@@ -17,7 +17,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { Edit, Trash2, MessageSquare, Plus } from 'lucide-react'
-import { updateTestimonial, deleteTestimonial } from '@/app/actions/testimonials/update-testimonial'
+import { updateTestimonial } from '@/app/actions/testimonials/update-testimonial'
 import { deleteTestimonial as deleteTestimonialAction } from '@/app/actions/testimonials/delete-testimonial'
 import { toast } from 'sonner'
 import Link from 'next/link'
@@ -46,7 +46,7 @@ export default function TestimonialsList({ initialTestimonials }: TestimonialsLi
       toast.success(`Testimonial ${!currentStatus ? 'activated' : 'deactivated'}`)
     } else {
       toast.error('Failed to update', {
-        description: result.error,
+        description: (result as { success: false; error: string }).error,
       })
     }
   }
@@ -61,7 +61,7 @@ export default function TestimonialsList({ initialTestimonials }: TestimonialsLi
       setShowDeleteDialog(null)
     } else {
       toast.error('Failed to delete', {
-        description: result.error,
+        description: (result as { success: false; error: string }).error,
       })
     }
 

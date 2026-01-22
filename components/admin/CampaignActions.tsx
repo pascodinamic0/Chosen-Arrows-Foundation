@@ -46,7 +46,7 @@ export default function CampaignActions({ campaignId, slug }: CampaignActionsPro
       router.refresh()
     } else {
       toast.error('Failed to delete', {
-        description: result.error,
+        description: (result as { success: false; error: string }).error,
       })
     }
 

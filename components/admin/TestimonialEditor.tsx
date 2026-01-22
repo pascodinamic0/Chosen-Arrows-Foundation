@@ -79,7 +79,7 @@ export default function TestimonialEditor({ testimonial }: TestimonialEditorProp
 
     try {
       if (isEditing && testimonial) {
-        const result = await updateTestimonial(testimonial.id, data)
+        const result = await updateTestimonial(testimonial.id, data as any)
         if (result.success) {
           toast.success('Testimonial updated', {
             description: 'Your changes have been saved.',
@@ -88,11 +88,11 @@ export default function TestimonialEditor({ testimonial }: TestimonialEditorProp
           router.refresh()
         } else {
           toast.error('Failed to update', {
-            description: result.error,
+            description: (result as { success: false; error: string }).error,
           })
         }
       } else {
-        const result = await createTestimonial(data)
+        const result = await createTestimonial(data as any)
         if (result.success) {
           toast.success('Testimonial created', {
             description: 'Redirecting to testimonials list...',
@@ -101,7 +101,7 @@ export default function TestimonialEditor({ testimonial }: TestimonialEditorProp
           router.refresh()
         } else {
           toast.error('Failed to create', {
-            description: result.error,
+            description: (result as { success: false; error: string }).error,
           })
         }
       }

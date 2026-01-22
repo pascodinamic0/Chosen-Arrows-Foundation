@@ -175,7 +175,7 @@ export default function CampaignEditor({ campaign }: CampaignEditorProps) {
           router.refresh()
         } else {
           toast.error('Failed to update', {
-            description: result.error,
+            description: (result as { success: false; error: string }).error,
           })
         }
       } else {
@@ -188,7 +188,7 @@ export default function CampaignEditor({ campaign }: CampaignEditorProps) {
           router.refresh()
         } else {
           toast.error('Failed to create', {
-            description: result.error,
+            description: (result as { success: false; error: string }).error,
           })
         }
       }

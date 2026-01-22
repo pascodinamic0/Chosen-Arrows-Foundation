@@ -98,7 +98,7 @@ const ImpactSection = ({ content }: { content?: ImpactContent }) => {
             const Icon = stat.icon;
             return (
               <div
-                key={content?.stats?.length ? `${stat.label}-${index}` : stat.labelKey}
+                key={`${stat.label}-${index}`}
                 className="enterprise-card p-6 hover-lift group"
               >
                 <div className="flex items-center gap-3 mb-4">

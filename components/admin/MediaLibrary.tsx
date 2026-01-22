@@ -80,7 +80,7 @@ export default function MediaLibrary({ initialImages }: MediaLibraryProps) {
         window.location.reload()
       } else {
         toast.error('Upload failed', {
-          description: result.error,
+          description: (result as { success: false; error: string }).error,
         })
       }
     } catch (error) {
@@ -110,7 +110,7 @@ export default function MediaLibrary({ initialImages }: MediaLibraryProps) {
       setShowDeleteDialog(null)
     } else {
       toast.error('Failed to delete', {
-        description: result.error,
+        description: (result as { success: false; error: string }).error,
       })
     }
   }

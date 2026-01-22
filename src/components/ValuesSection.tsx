@@ -96,7 +96,7 @@ const ValuesSection = ({ content }: { content?: ValuesContent }) => {
             
             return (
               <div
-                key={content?.values?.length ? `${value.title}-${index}` : value.titleKey}
+                key={`${value.title}-${index}`}
                 className={`enterprise-card p-6 hover-lift group ${
                   isLarge ? "md:col-span-2 lg:col-span-1" : ""
                 }`}

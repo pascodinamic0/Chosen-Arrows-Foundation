@@ -88,7 +88,7 @@ export default function ContentSectionEditor({
         })
       } else {
         toast.error('Failed to save', {
-          description: result.error,
+          description: (result as { success: false; error: string }).error,
         })
       }
     } catch (error) {

@@ -24,12 +24,12 @@ export async function generateMetadata(): Promise<Metadata> {
       openGraph: {
         title: metadata.og_title || metadata.title || "Chosen Arrows Foundation",
         description: metadata.og_description || metadata.description || "A five-scene, story-driven journey that turns a child's present into a clear decision.",
-        type: metadata.og_type || "website",
+        type: (metadata.og_type || "website") as any,
         images: metadata.og_image_url ? [{ url: metadata.og_image_url }] : undefined,
         siteName: "Chosen Arrows Foundation",
       },
       twitter: {
-        card: metadata.twitter_card || "summary_large_image",
+        card: (metadata.twitter_card || "summary_large_image") as any,
         title: metadata.twitter_title || metadata.title || "Chosen Arrows Foundation",
         description: metadata.twitter_description || metadata.description || "A five-scene, story-driven journey that turns a child's present into a clear decision.",
         images: metadata.twitter_image_url ? [metadata.twitter_image_url] : undefined,

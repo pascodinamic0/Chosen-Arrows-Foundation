@@ -71,7 +71,7 @@ export default function CampaignUpdatesManager({ campaignId }: CampaignUpdatesMa
           resetForm()
           loadUpdates()
         } else {
-          toast.error('Failed to save', { description: result.error })
+          toast.error('Failed to save', { description: (result as { success: false; error: string }).error })
         }
       } else {
         const result = await createCampaignUpdate(
@@ -84,7 +84,7 @@ export default function CampaignUpdatesManager({ campaignId }: CampaignUpdatesMa
           resetForm()
           loadUpdates()
         } else {
-          toast.error('Failed to create', { description: result.error })
+          toast.error('Failed to create', { description: (result as { success: false; error: string }).error })
         }
       }
     } catch (error) {
@@ -109,7 +109,7 @@ export default function CampaignUpdatesManager({ campaignId }: CampaignUpdatesMa
       setShowDeleteDialog(null)
       loadUpdates()
     } else {
-      toast.error('Failed to delete', { description: result.error })
+      toast.error('Failed to delete', { description: (result as { success: false; error: string }).error })
     }
   }
 

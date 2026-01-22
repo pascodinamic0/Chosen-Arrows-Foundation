@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     openGraph: {
       title: pageMetadata?.og_title || pageMetadata?.title || `${title} | Chosen Arrows Foundation`,
       description: pageMetadata?.og_description || pageMetadata?.description || `Support ${child} - ${fullStory.substring(0, 150)}...`,
-      type: pageMetadata?.og_type || "website",
+      type: (pageMetadata?.og_type || "website") as any,
       images: campaign.primaryImage ? [
         {
           url: campaign.primaryImage,
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       ] : pageMetadata?.og_image_url ? [{ url: pageMetadata.og_image_url }] : undefined,
     },
     twitter: {
-      card: pageMetadata?.twitter_card || "summary_large_image",
+      card: (pageMetadata?.twitter_card || "summary_large_image") as any,
       title: pageMetadata?.twitter_title || pageMetadata?.title || `${title} | Chosen Arrows Foundation`,
       description: pageMetadata?.twitter_description || pageMetadata?.description || `Support ${child} - ${progress}% funded. Help us reach $${campaign.goal_amount.toLocaleString()}`,
       images: campaign.primaryImage ? [campaign.primaryImage] : pageMetadata?.twitter_image_url ? [pageMetadata.twitter_image_url] : undefined,

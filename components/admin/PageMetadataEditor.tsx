@@ -103,7 +103,7 @@ export default function PageMetadataEditor({
         })
       } else {
         toast.error('Failed to save', {
-          description: result.error,
+          description: (result as { success: false; error: string }).error,
         })
       }
     } catch (error) {
