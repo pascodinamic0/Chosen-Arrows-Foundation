@@ -1,5 +1,3 @@
-# git
-
 ---
 allowed-tools: [Bash, Read, Glob, TodoWrite, Edit]
 description: "Git operations with intelligent commit messages and branch management"
@@ -305,3 +303,4 @@ This simplified workflow integrates with the existing git commands:
 - Use `/git commit --message "feat: description"` following conventional commits
 - Use `/git merge feat/feature-name` to merge back to develop
 - Clean up with branch deletion after successful merges
+
