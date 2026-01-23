@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "next-devtools": {
+      "command": "/Users/Pascal Digny/.nvm/versions/node/v24.5.0/bin/node",
+      "args": ["/Users/Pascal Digny/.nvm/versions/node/v24.5.0/lib/node_modules/next-devtools-mcp/dist/index.js"]
+    }
+  }
+}
