@@ -241,7 +241,7 @@ export default function DonateClient() {
                           <FormItem>
                             <FormLabel className="text-lg font-semibold">Select Amount</FormLabel>
                             <FormControl>
-                              <>
+                              <div className="space-y-3">
                                 <div className="grid grid-cols-3 gap-3">
                                   {presetAmounts.map((preset) => (
                                     <Button
@@ -268,7 +268,7 @@ export default function DonateClient() {
                                     step="0.01"
                                   />
                                 </div>
-                              </>
+                              </div>
                             </FormControl>
                             <FormMessage />
                           </FormItem>

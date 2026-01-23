@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Providers } from "@/components/Providers";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { getSetting } from "@/app/actions/settings/get-settings";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -47,35 +46,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Fetch footer data in parallel with better error handling
-  let contactInfo = null;
-  let socialLinks = null;
-
-  try {
-    [contactInfo, socialLinks] = await Promise.all([
-      getSetting('contact_info').catch(() => null),
-      getSetting('social_links').catch(() => null),
-    ]);
-  } catch (error) {
-    console.error('Error fetching layout settings:', error);
-    // Continue with null values - layout should still render
-  }
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
         <Providers>
           <Navigation />
           {children}
-          <Footer 
-            contactInfo={contactInfo as any}
-            socialLinks={socialLinks as any}
-          />
+          <Footer />
         </Providers>
       </body>
     </html>

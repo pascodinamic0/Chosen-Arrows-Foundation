@@ -1,73 +1,71 @@
-# Welcome to your Lovable project
+# Chosen Arrows Foundation
 
-## Project info
+A crowdfunding and community platform built with Next.js 16, Supabase, and Tailwind CSS.
 
-**URL**: https://lovable.dev/projects/95e0baa1-5664-448e-9693-152e8090927d
+## Quick Start
 
-## How can I edit this code?
+```bash
+# Install dependencies
+bun install
 
-There are several ways of editing your application.
+# Copy environment template and configure
+cp env.example .env.local
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/95e0baa1-5664-448e-9693-152e8090927d) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Start development server
+bun run dev
 ```
 
-**Edit a file directly in GitHub**
+## Project Structure
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+├── app/                    # Next.js App Router
+│   ├── actions/            # Server actions
+│   ├── admin/              # Admin dashboard pages
+│   ├── campaigns/          # Campaign pages
+│   └── proxy.ts            # Next.js 16 proxy (auth routing)
+├── components/             # Admin-specific components
+├── docs/                   # Project documentation
+│   ├── ARCHITECTURE_SPEC.md
+│   ├── SETUP_GUIDE.md
+│   ├── QUICK_START.md
+│   └── ...
+├── lib/                    # Shared utilities
+├── public/                 # Static assets
+├── scripts/                # Utility scripts
+├── src/                    # Source code
+│   ├── components/         # UI components
+│   ├── hooks/              # React hooks
+│   ├── i18n/               # Internationalization
+│   └── lib/                # Client utilities
+└── supabase/               # Database migrations
+```
 
-**Use GitHub Codespaces**
+## Documentation
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+All detailed documentation is in the `docs/` folder:
 
-## What technologies are used for this project?
+- **[QUICK_START.md](docs/QUICK_START.md)** - Get started quickly
+- **[SETUP_GUIDE.md](docs/SETUP_GUIDE.md)** - Detailed setup instructions
+- **[ARCHITECTURE_SPEC.md](docs/ARCHITECTURE_SPEC.md)** - System architecture
+- **[ADMIN_DASHBOARD_SPEC.md](docs/ADMIN_DASHBOARD_SPEC.md)** - Admin features
+- **[SUPABASE_SETUP.md](docs/SUPABASE_SETUP.md)** - Database configuration
 
-This project is built with:
+## Tech Stack
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Framework**: Next.js 16 (App Router, Turbopack)
+- **Database**: Supabase (PostgreSQL)
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Language**: TypeScript
+- **Package Manager**: Bun
 
-## How can I deploy this project?
+## Scripts
 
-Simply open [Lovable](https://lovable.dev/projects/95e0baa1-5664-448e-9693-152e8090927d) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```bash
+bun run dev              # Start development server
+bun run build            # Build for production
+bun run start            # Start production server
+bun run lint             # Run ESLint
+bun run verify-setup     # Verify project setup
+bun run verify-supabase  # Verify Supabase connection
+```

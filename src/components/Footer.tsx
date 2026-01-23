@@ -5,23 +5,32 @@ import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import logo from "@/assets/logo.jpg";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
-type FooterProps = {
-  contactInfo?: {
-    email?: string;
-    phone?: string;
-    address?: string;
-  };
-  socialLinks?: {
-    facebook?: string;
-    twitter?: string;
-    instagram?: string;
-    linkedin?: string;
-  };
-};
-
-const Footer = ({ contactInfo, socialLinks: socialLinksProp }: FooterProps) => {
+const Footer = () => {
   const { t } = useTranslation();
+  const [contactInfo, setContactInfo] = useState<{ email?: string; phone?: string; address?: string } | null>(null);
+  const [socialLinks, setSocialLinks] = useState<{ facebook?: string; twitter?: string; instagram?: string; linkedin?: string } | null>(null);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const supabase = createClient();
+        const [contactResult, socialResult] = await Promise.all([
+          supabase.from('site_settings').select('setting_value').eq('setting_key', 'contact_info').single(),
+          supabase.from('site_settings').select('setting_value').eq('setting_key', 'social_links').single(),
+        ]);
+
+        if (contactResult.data) setContactInfo(contactResult.data.setting_value);
+        if (socialResult.data) setSocialLinks(socialResult.data.setting_value);
+      } catch (error) {
+        console.error('Error fetching footer settings:', error);
+      }
+    };
+
+    fetchSettings();
+  }, []);
 
   const quickLinks = [
     { href: "#mission", label: t("footer.ourMission") },
@@ -37,11 +46,11 @@ const Footer = ({ contactInfo, socialLinks: socialLinksProp }: FooterProps) => {
     { href: "/contact", label: t("footer.partner") },
   ];
 
-  const socialLinks = [
-    { icon: Facebook, href: socialLinksProp?.facebook || "#", label: "Facebook" },
-    { icon: Twitter, href: socialLinksProp?.twitter || "#", label: "Twitter" },
-    { icon: Instagram, href: socialLinksProp?.instagram || "#", label: "Instagram" },
-    { icon: Linkedin, href: socialLinksProp?.linkedin || "#", label: "LinkedIn" },
+  const socialLinksArray = [
+    { icon: Facebook, href: socialLinks?.facebook || "#", label: "Facebook" },
+    { icon: Twitter, href: socialLinks?.twitter || "#", label: "Twitter" },
+    { icon: Instagram, href: socialLinks?.instagram || "#", label: "Instagram" },
+    { icon: Linkedin, href: socialLinks?.linkedin || "#", label: "LinkedIn" },
   ];
 
   const email = contactInfo?.email || "ChosenArrowsFoundation@gmail.com";
@@ -68,7 +77,7 @@ const Footer = ({ contactInfo, socialLinks: socialLinksProp }: FooterProps) => {
               {t("footer.tagline")}
             </p>
             <div className="flex gap-2">
-              {socialLinks.map((social) => {
+              {socialLinksArray.map((social) => {
                 const Icon = social.icon;
                 return (
                   <a
